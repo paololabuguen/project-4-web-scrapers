@@ -34,7 +34,6 @@ h1 {
     text-align: center;
 }
 
-
 /* ------------------------ */
 /* Visualization Grid Style */
 /* ------------------------ */
@@ -61,7 +60,7 @@ h1 {
 
     min-width: 300px;
     min-height: 300px;
-    gap: 30px;
+    gap: 40px;
     margin-top: 10vh;
 }
 
@@ -74,10 +73,12 @@ h1 {
     border-radius: 20px;
     border: 1px solid rgb(109, 109, 109);
     background-color: rgb(145, 145, 145);
+    align-items: center;
 }
 
 .grid-elem {
     text-align: center;
+    padding: 10px;
 }
 
 

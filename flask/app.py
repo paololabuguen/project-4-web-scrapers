@@ -25,7 +25,7 @@ Base.prepare(autoload_with=engine)
 # Create app
 app = Flask(__name__)
 # Do not sort keys
-app.json.sort_keys = False
+# app.json.sort_keys = False
 
 # Store the table in a variable
 Bank_Loan_Test = Base.classes.bank_loan
@@ -50,7 +50,7 @@ def homepage():
 def all_data():
     # getattr of columns for Bank_Loan_Test to pass to the query
     columns = [getattr(Bank_Loan_Test, column) for column in column_names]
-    
+
     # Query all results
     session = Session(engine)
     results = session.query(*columns).all()
@@ -96,6 +96,7 @@ def loan_funded():
     
     # Query the counts of loans funded from <5k, 5k-10k, 10k-20k, 20k-30k and >30k
     session = Session(engine)
+
     results_less_5k = session.query(func.count(Bank_Loan_Test.funded_amount))\
         .where(Bank_Loan_Test.funded_amount < 5000)\
         .all()
