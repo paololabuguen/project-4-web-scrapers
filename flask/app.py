@@ -25,7 +25,7 @@ Base.prepare(autoload_with=engine)
 # Create app
 app = Flask(__name__)
 # Do not sort keys
-# app.json.sort_keys = False
+app.json.sort_keys = False
 
 # Store mainDS table in a variable
 Bank_Loan_Test = Base.classes.bank_loan
@@ -42,14 +42,19 @@ column_names = [columns.key for columns in inspector.mapper.column_attrs]
 #####################################################
 @app.route("/")
 def homepage():
-    return("Homepage for Project 4 - Web Scrapers API"
+    return("Homepage for Project 4 - Web Scrapers API<br/>"
            "Available routes:<br/>"
+           "/api/v1/all_data (All data in mainDS.csv)<br/>"
+           "/api/v1/loan_status (Number of defaulters and non-defaulters)<br/>"
            "/api/v1/home_owner_type (Count of each home ownership type)<br/>"
            "/api/v1/loan_funded (Count of amounts of loans funded by category)<br/>"
+           "/api/v1/employment_duration (Counts of employment duration of applicants)<br/>"
            "/api/v1/raph_training_record (Raph's Training Record Dataframe)<br/>"
            )
 
-# Route for all data in mainDS.csv
+#####################################################
+###       Route for all data in mainDS.csv        ###
+#####################################################
 @app.route("/api/v1/all_data")
 def all_data():
     # getattr of columns for Bank_Loan_Test to pass to the query
@@ -73,11 +78,14 @@ def all_data():
     
     return jsonify(all_test_data)
 
-# Mortgage type distribution route
+
+#####################################################
+###     Home ownership type distribution route    ###
+#####################################################
 @app.route("/api/v1/home_owner_type")
 def home_owner_type():
 
-    # Object to jsonify
+    # Dictionary to jsonify
     mortgage_dict = {}
 
     # Query the count of each home_ownership type
@@ -94,7 +102,10 @@ def home_owner_type():
 
     return jsonify(mortgage_dict)
 
-# Route for loans funded
+
+#####################################################
+###            Route for loans funded             ###
+#####################################################
 @app.route("/api/v1/loan_funded")
 def loan_funded():
     
@@ -131,7 +142,7 @@ def loan_funded():
     
     session.close()
 
-    # Object to jsonify
+    # Dictionary to jsonify
     loan_funded_json = {'Less than 5000': results_less_5k[0][0],
                         '5000 - 10000': results_5k_10k[0][0],
                         '10000 - 15000': results_10k_15k[0][0],
@@ -141,14 +152,72 @@ def loan_funded():
 
     return jsonify(loan_funded_json)
 
-# Route for Raph's Training record csv
+#####################################################
+###         Route for Employment Duration         ###
+#####################################################
+@app.route("/api/v1/employment_duration")
+def employment_duration():
+
+    # Object for the data to be returned as a JSON
+    employment_duration_json = {}
+    
+    # Query the employment duration and their counts
+    session = Session(engine)
+    results = session.query(Bank_Loan_Test.employment_duration, func.count(Bank_Loan_Test.employment_duration))\
+        .group_by(Bank_Loan_Test.employment_duration)\
+        .all()
+    session.close()
+
+    # List of employment duration and list of their counts
+    emp_duration = [dur[0] for dur in results]
+    emp_duration_count = [count[1] for count in results]
+
+    # Add to employment_duration_json where the key is years of employment and 
+    # values are their counts
+    for i in range(len(emp_duration)):
+        employment_duration_json[emp_duration[i]] = emp_duration_count[i]
+    
+    return jsonify(employment_duration_json)
+
+#####################################################
+###             Route for Loan Status             ###
+#####################################################
+@app.route("/api/v1/loan_status")
+def loan_status():
+
+    # Object for the data to be returned as a JSON
+    loan_status_json = {}
+    
+    # Query the employment duration and their counts
+    session = Session(engine)
+    results = session.query(Bank_Loan_Test.loan_status, func.count(Bank_Loan_Test.loan_status))\
+        .group_by(Bank_Loan_Test.loan_status)\
+        .all()
+    session.close()
+
+    # List of employment duration and list of their counts
+    loan_status = [stat[0] for stat in results]
+    loan_status_count = [count[1] for count in results]
+
+    # Add to employment_duration_json where the key is years of employment and 
+    # values are their counts
+    for i in range(len(loan_status)):
+        if loan_status[i] == 1:
+            loan_status_json["Defaulters"] = loan_status_count[i]
+        else:
+            loan_status_json["Non-defaulters"] = loan_status_count[i]
+    
+    return jsonify(loan_status_json)
+
+#####################################################
+###      Route for Raph's Training record csv     ###
+#####################################################
 @app.route("/api/v1/raph_training_record")
 def raph_training_record():
-    # inspector = inspect(Raph_Training_record)
-    # column_names = [columns.key for columns in inspector.mapper.column_attrs]
-    # columns = [getattr(Bank_Loan_Test, column) for column in column_names]
 
+    # Dictionary for the data to be returned as a JSON
     raph_train_results_json = {}
+
     # Query all results
     session = Session(engine)
     results_loss = session.query(Raph_Training_record.loss).all()
