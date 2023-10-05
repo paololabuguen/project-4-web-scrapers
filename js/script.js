@@ -1,30 +1,46 @@
 let link = "http://127.0.0.1:5000/api/v1/";
 
 function homeOwnerTypeGraph(oldChart) {
+    /**Graphs the home owner type donut chart and returns the chart
+     * 
+     * parameter: Chart
+     * 
+     * We pass this parameter to destroy (if it exists) so we can plot the 
+     * new graph taking over its place in the dashboard
+     */
+
     // Define the link to access the data from the Flask API
+    // This is the link to the route of the json we want, in this case,
+    // the home ownership types
     let homeOwnerString = link + "home_owner_type";
 
     // Get the graph-1-grid element for the graph
+    // We need to pass this as a param to the Chart
     let ctx = document.getElementById('graph-1-grid');
 
     // Delete the old chart to replace for the new one
+    // The new graph would not be plotted if the old chart was not destroyed
     if (oldChart != undefined) {
         oldChart.destroy();
     }
 
     // Define a new Donut Chart
+    
     donutChart = new Chart(ctx, {
+        // Customize the chart
+        // Try to look at Chart.js documentation for more customizations
+        // Chart.js has a weird way of doing customizations which is sometimes annoying
 
         // Donut type chart
         type: 'doughnut',
 
-        // This is where we specify datasetsS
+        // This is where we specify datasets
+        // We fill this in later when we call d3.json
         data: {},
         options: {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-
                 // Configurations for the title
                 title: {
                     color: 'black',
@@ -35,6 +51,7 @@ function homeOwnerTypeGraph(oldChart) {
                     text: 'Home Ownership Type'
                 },
 
+                // Legend style
                 legend: {
                     labels: {
                         color: 'black'
@@ -46,6 +63,7 @@ function homeOwnerTypeGraph(oldChart) {
     })
 
     // Access the API for the homeowner type data to plot into the donut chart
+    // We add this to data from the donut chart we created earlier
     d3.json(homeOwnerString).then(data => {
 
         // Type of home ownership
@@ -63,6 +81,8 @@ function homeOwnerTypeGraph(oldChart) {
             datasets: [{
                 label: 'Home Ownership Type',
                 data: donutValues,
+
+                // Set color values for the slices
                 backgroundColor: [
                     '#531F7D',
                     '#497D1F',
@@ -72,15 +92,26 @@ function homeOwnerTypeGraph(oldChart) {
         };
         
         // Update the donut chart
+        // We set the data collected from the API first then we call update()
+        // to update the chart
         donutChart.data = donutData;
         donutChart.update();
     })
 
+    // Return the donut chart
     return donutChart
 }
 
 
 function loanFundedGraph(oldChart) {
+    /**Graphs the number of loans funded by the amounts
+     * 
+     * parameter: Chart
+     * 
+     * We pass this parameter to destroy (if it exists) so we can plot the 
+     * new graph taking over its place in the dashboard
+     */
+
     // Define the link to access the data from the Flask API
     let loanFundedString = link + "loan_funded";
 
@@ -208,14 +239,29 @@ function loanFundedGraph(oldChart) {
     return barChart
 }
 
-
+// Initialize Graphs
+// Notice we save the chart to a variable.
+// This is to pass as a parameter back into the function to destroy 
+// and create a new chart.
+// grid1 is the graph appearing on the left
 grid1 = homeOwnerTypeGraph()
-function graph2() {
-    grid1 = loanFundedGraph(grid1)
-}
+
+// This is the function called when you click Graph 1 on the side panel
 function graph1() {
+    // Once again, we store the chart into a variable to destroy, if needed to, later
+    // Whenever we wanna replace the left visualization, we store it in the
+    // variable grid1
     grid1 = homeOwnerTypeGraph(grid1)
 }
 
+// This is the function called when you click Graph 2 on the side panel
+function graph2() {
+    // Once again, we store the chart into a variable to destroy, if needed to, later
+    // Whenever we wanna replace the left visualization, we store it in the
+    // variable grid1
+    grid1 = loanFundedGraph(grid1)
+}
+
+// Click event when the side panel options are clicked
 document.getElementById("graph-1").addEventListener("click", graph1);
 document.getElementById("graph-2").addEventListener("click", graph2);
