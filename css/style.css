@@ -54,19 +54,19 @@ h1 {
     height: 80vh;
     width: 100%;
 
-    padding: 40px 0px 0px 300px;
+    padding: 40px 0px 0px 350px;
 
     justify-items: stretch;
     place-self: center;
 
     min-width: 300px;
     min-height: 300px;
-    gap: 100px;
+    gap: 50px;
     margin-top: 10vh;
 }
 
 .grid-elem {
-    width: 100%;
+    width: 80%;
     height: 85%;
     min-width: 300px;
     min-height: 300px;
@@ -75,11 +75,13 @@ h1 {
     border: 1px solid rgb(109, 109, 109);
     background-color: rgb(221, 221, 221);
     align-items: center;
-}
-
-.grid-elem {
     text-align: center;
     padding: 30px;
+}
+
+#graph-1-grid-text {
+    height: 100%;
+    width: 100%;
 }
 
 
@@ -116,6 +118,6 @@ h1 {
     /* background-color: #9f94ca; */
 }
 
-#model-4, #graph-4 {
+#model-4-panel, #graph-4-panel {
     border-bottom: 1px solid rgb(109, 109, 109);
 }

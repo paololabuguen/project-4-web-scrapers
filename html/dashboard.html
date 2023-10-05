@@ -32,10 +32,10 @@
                 <h3 class="side-panel-header">Select Model</h3>
 
                 <!-- Clickable options for the models -->
-                <li class="model-item" id="model-1" onclick="">Model 1</li>
-                <li class="model-item" id="model-2">Model 2</li>
-                <li class="model-item" id="model-3">Model 3</li>
-                <li class="model-item" id="model-4">Model 4</li>
+                <li class="model-item" id="model-1-panel" onclick="">Model 1</li>
+                <li class="model-item" id="model-2-panel">Model 2</li>
+                <li class="model-item" id="model-3-panel">Model 3</li>
+                <li class="model-item" id="model-4-panel">Model 4</li>
             </ul>
 
             <!-- Side panel list for optional graphs -->
@@ -43,18 +43,16 @@
                 <h3 class="side-panel-header">Optional Graphs?</h3>
 
                 <!-- Clickable options for the data graphs -->
-                <li class="model-item" id="graph-1">Graph 1</li>
-                <li class="model-item" id="graph-2">Graph 2</li>
-                <li class="model-item" id="graph-3">Graph 3</li>
-                <li class="model-item" id="graph-4">Graph 4</li>
+                <li class="model-item" id="graph-1-panel">Graph 1</li>
+                <li class="model-item" id="graph-2-panel">Graph 2</li>
+                <li class="model-item" id="graph-3-panel">Graph 3</li>
+                <li class="model-item" id="graph-4-panel">Graph 4</li>
             </ul>
         </div>
 
         <div class="grid-container">
-            <div class="grid-elem">
-                <canvas id="graph-1-grid"></canvas>
-            </div>
-            <div class="grid-elem" id="graph-2-grid">Graph/Text 2</div>
+            <div class="grid-elem" id="graph-1"></div>
+            <div class="grid-elem" id="graph-2"></div>
             <!-- <div class="grid-elem" id="graph-3-grid">Graph/Text 3</div>
             <div class="grid-elem" id="graph-4-grid">Graph/Text 4</div> -->
         </div>
@@ -65,5 +63,6 @@
 
 <!-- Our Javascript code -->
 <script type="text/javascript" src="../js/script.js"></script>
+<script type="text/javascript" src="../js/model1.js"></script>
 
 </html>

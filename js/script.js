@@ -1,14 +1,20 @@
 let link = "http://127.0.0.1:5000/api/v1/";
 
-function homeOwnerTypeGraph(oldChart) {
+graphGrid1CanvasString = '<canvas id=\"graph-1-grid\"></canvas>';
+graphGrid2CanvasString = '<canvas id=\"graph-2-grid\"></canvas>';
+graphGrid1TextString = '<div id=\"graph-1-grid-text\"></div>';
+graphGrid2TextString = '<div id=\"graph-2-grid-text\"></div>';
+//-----------------------------------------------//
+// Function to graph the donut chart for graph 1 //
+//-----------------------------------------------//
+
+function homeOwnerTypeGraph() {
     /**Graphs the home owner type donut chart and returns the chart
      * 
-     * parameter: Chart
-     * 
-     * We pass this parameter to destroy (if it exists) so we can plot the 
-     * new graph taking over its place in the dashboard
      */
 
+    document.getElementById("graph-1").innerHTML = graphGrid1CanvasString;
+    document.getElementById("graph-2").innerHTML = graphGrid2CanvasString;
     // Define the link to access the data from the Flask API
     // This is the link to the route of the json we want, in this case,
     // the home ownership types
@@ -18,15 +24,10 @@ function homeOwnerTypeGraph(oldChart) {
     // We need to pass this as a param to the Chart
     let ctx = document.getElementById('graph-1-grid');
 
-    // Delete the old chart to replace for the new one
-    // The new graph would not be plotted if the old chart was not destroyed
-    if (oldChart != undefined) {
-        oldChart.destroy();
-    }
-
     // Define a new Donut Chart
-    
+
     donutChart = new Chart(ctx, {
+
         // Customize the chart
         // Try to look at Chart.js documentation for more customizations
         // Chart.js has a weird way of doing customizations which is sometimes annoying
@@ -38,8 +39,11 @@ function homeOwnerTypeGraph(oldChart) {
         // We fill this in later when we call d3.json
         data: {},
         options: {
+
+            // These 2 below makes the graph stay inside their div elements
             responsive: true,
             maintainAspectRatio: false,
+
             plugins: {
                 // Configurations for the title
                 title: {
@@ -90,7 +94,7 @@ function homeOwnerTypeGraph(oldChart) {
                 ]
             }]
         };
-        
+
         // Update the donut chart
         // We set the data collected from the API first then we call update()
         // to update the chart
@@ -98,30 +102,23 @@ function homeOwnerTypeGraph(oldChart) {
         donutChart.update();
     })
 
-    // Return the donut chart
-    return donutChart
 }
 
+//-----------------------------------------------//
+//  Function to graph the bar chart for graph 2  //
+//-----------------------------------------------//
 
 function loanFundedGraph(oldChart) {
     /**Graphs the number of loans funded by the amounts
-     * 
-     * parameter: Chart
-     * 
-     * We pass this parameter to destroy (if it exists) so we can plot the 
-     * new graph taking over its place in the dashboard
      */
 
+    document.getElementById("graph-1").innerHTML = graphGrid1CanvasString;
+    document.getElementById("graph-2").innerHTML = graphGrid2CanvasString;
     // Define the link to access the data from the Flask API
     let loanFundedString = link + "loan_funded";
 
     // Get the graph-1-grid element for the graph
     let ctx = document.getElementById('graph-1-grid');
-
-    // Delete the old chart to replace for the new one
-    if (oldChart != undefined) {
-        oldChart.destroy();
-    }
 
     // Define a new Donut Chart
     barChart = new Chart(ctx, {
@@ -145,7 +142,7 @@ function loanFundedGraph(oldChart) {
                     display: true,
                     text: 'Loan Funded Amounts'
                 },
-                
+
                 // Don't want to display the legend for the bar chart
                 legend: {
                     display: false
@@ -230,38 +227,26 @@ function loanFundedGraph(oldChart) {
                 ]
             }]
         };
-        
+
         // Update the donut chart
         barChart.data = barData;
         barChart.update();
     })
-
-    return barChart
 }
 
 // Initialize Graphs
-// Notice we save the chart to a variable.
-// This is to pass as a parameter back into the function to destroy 
-// and create a new chart.
-// grid1 is the graph appearing on the left
-grid1 = homeOwnerTypeGraph()
+homeOwnerTypeGraph()
 
 // This is the function called when you click Graph 1 on the side panel
 function graph1() {
-    // Once again, we store the chart into a variable to destroy, if needed to, later
-    // Whenever we wanna replace the left visualization, we store it in the
-    // variable grid1
-    grid1 = homeOwnerTypeGraph(grid1)
+    homeOwnerTypeGraph()
 }
 
 // This is the function called when you click Graph 2 on the side panel
 function graph2() {
-    // Once again, we store the chart into a variable to destroy, if needed to, later
-    // Whenever we wanna replace the left visualization, we store it in the
-    // variable grid1
-    grid1 = loanFundedGraph(grid1)
+    loanFundedGraph()
 }
 
 // Click event when the side panel options are clicked
-document.getElementById("graph-1").addEventListener("click", graph1);
-document.getElementById("graph-2").addEventListener("click", graph2);
+document.getElementById("graph-1-panel").addEventListener("click", graph1);
+document.getElementById("graph-2-panel").addEventListener("click", graph2);
