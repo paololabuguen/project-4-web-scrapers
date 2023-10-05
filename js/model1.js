@@ -183,6 +183,8 @@ function model1Graph() {
 
 // This is the function called when you click Model 1 on the side panel
 function model1() {
+    // Want 4 grid elements
+    grid4();
     // Refresh the grid elements
     // Replacing the inner HTML makes it possible to change the items contained in the
     // grid to the new items from this model

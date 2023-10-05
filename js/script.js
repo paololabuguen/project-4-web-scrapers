@@ -13,6 +13,9 @@ const graphGrid2CanvasString = '<canvas id=\"graph-2-grid\"></canvas>';
 const graphGrid1TextString = '<div id=\"graph-1-grid-text\"></div>';
 const graphGrid2TextString = '<div id=\"graph-2-grid-text\"></div>';
 
+const gridElements2 = '<div class=\"grid-elem\" id=\"graph-1\"></div><div class=\"grid-elem\" id=\"graph-2\"></div>'
+
+const gridElements4 = '<div class=\"grid-elem\" id=\"graph-1\"></div><div class=\"grid-elem\" id=\"graph-2\"></div><div class=\"grid-elem\" id=\"graph-3\"></div><div class=\"grid-elem\" id=\"graph-4\"></div>'
 //-----------------------------------------------//
 //  Function to graph the bar chart for graph 1  //
 //-----------------------------------------------//
@@ -458,8 +461,20 @@ function homeOwnerTypeGraph() {
 
 }
 
+// This function creates 2 grid elements
+function grid2() {
+    document.getElementById('grid-container').innerHTML = gridElements2
+}
+
+// This function creates 4 grid elements 
+function grid4() {
+    document.getElementById('grid-container').innerHTML = gridElements4
+}
+
 // This is the function called when you click Graph 1 on the side panel
 function graph1() {
+    // Want only 2 grid elements
+    grid2();
     // Replacing the inner HTML makes it possible to change the items contained in the
     // grid to the new items from this model
     document.getElementById("graph-1").innerHTML = graphGrid1CanvasString;
@@ -472,6 +487,8 @@ function graph1() {
 
 // This is the function called when you click Graph 2 on the side panel
 function graph2() {
+    // Want only 2 grid elements
+    grid2();
     // Replacing the inner HTML makes it possible to change the items contained in the
     // grid to the new items from this model
     document.getElementById("graph-1").innerHTML = graphGrid1CanvasString;
