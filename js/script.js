@@ -20,8 +20,6 @@ const graphGrid2TextString = '<div id=\"graph-2-grid-text\"></div>';
 function homeOwnerTypeGraph() {
     /** Graphs the home owner type donut chart and returns the chart */
 
-    document.getElementById("graph-1").innerHTML = graphGrid1CanvasString;
-    document.getElementById("graph-2").innerHTML = graphGrid2CanvasString;
     // Define the link to access the data from the Flask API
     // This is the link to the route of the json we want, in this case,
     // the home ownership types
@@ -116,11 +114,8 @@ function homeOwnerTypeGraph() {
 //-----------------------------------------------//
 
 function loanFundedGraph(oldChart) {
-    /**Graphs the number of loans funded by the amounts
-     */
+    /**Graphs the number of loans funded by the amounts */
 
-    document.getElementById("graph-1").innerHTML = graphGrid1CanvasString;
-    document.getElementById("graph-2").innerHTML = graphGrid2CanvasString;
     // Define the link to access the data from the Flask API
     let loanFundedString = link + "loan_funded";
 
@@ -242,16 +237,28 @@ function loanFundedGraph(oldChart) {
 }
 
 // Initialize Graphs
-homeOwnerTypeGraph()
+homeOwnerTypeGraph();
 
 // This is the function called when you click Graph 1 on the side panel
 function graph1() {
-    homeOwnerTypeGraph()
+    // Replacing the inner HTML makes it possible to change the items contained in the
+    // grid to the new items from this model
+    document.getElementById("graph-1").innerHTML = graphGrid1CanvasString;
+    document.getElementById("graph-2").innerHTML = graphGrid2CanvasString;
+
+    // Call the functions to fill the grid elements
+    homeOwnerTypeGraph();
 }
 
 // This is the function called when you click Graph 2 on the side panel
 function graph2() {
-    loanFundedGraph()
+    // Replacing the inner HTML makes it possible to change the items contained in the
+    // grid to the new items from this model
+    document.getElementById("graph-1").innerHTML = graphGrid1CanvasString;
+    document.getElementById("graph-2").innerHTML = graphGrid2CanvasString;
+
+    // Call the functions to fill the grid elements
+    loanFundedGraph();
 }
 
 // Click event when the side panel options are clicked

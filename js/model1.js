@@ -182,7 +182,6 @@ function model1Graph() {
 }
 
 
-// Might be 
 // This is the function called when you click Model 1 on the side panel
 function model1() {
     // Refresh the grid elements
