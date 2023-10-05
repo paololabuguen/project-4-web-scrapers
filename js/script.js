@@ -1,17 +1,24 @@
-let link = "http://127.0.0.1:5000/api/v1/";
+const link = "http://127.0.0.1:5000/api/v1/";
 
-graphGrid1CanvasString = '<canvas id=\"graph-1-grid\"></canvas>';
-graphGrid2CanvasString = '<canvas id=\"graph-2-grid\"></canvas>';
-graphGrid1TextString = '<div id=\"graph-1-grid-text\"></div>';
-graphGrid2TextString = '<div id=\"graph-2-grid-text\"></div>';
+// Strings to replace the element inside the grid divs
+
+// You can only plot Chart.js charts on a canvas
+// There is a way to add text to canvas but I did not study this yet so when we add text,
+// replace the element with a div instead
+
+// This makes it possible to refresh the graphs when you click a different option on the 
+// side panel.
+const graphGrid1CanvasString = '<canvas id=\"graph-1-grid\"></canvas>';
+const graphGrid2CanvasString = '<canvas id=\"graph-2-grid\"></canvas>';
+const graphGrid1TextString = '<div id=\"graph-1-grid-text\"></div>';
+const graphGrid2TextString = '<div id=\"graph-2-grid-text\"></div>';
+
 //-----------------------------------------------//
 // Function to graph the donut chart for graph 1 //
 //-----------------------------------------------//
 
 function homeOwnerTypeGraph() {
-    /**Graphs the home owner type donut chart and returns the chart
-     * 
-     */
+    /** Graphs the home owner type donut chart and returns the chart */
 
     document.getElementById("graph-1").innerHTML = graphGrid1CanvasString;
     document.getElementById("graph-2").innerHTML = graphGrid2CanvasString;
