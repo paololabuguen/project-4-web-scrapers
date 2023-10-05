@@ -188,18 +188,18 @@ def loan_status():
     # Object for the data to be returned as a JSON
     loan_status_json = {}
     
-    # Query the employment duration and their counts
+    # Query the loan status and their counts
     session = Session(engine)
     results = session.query(Bank_Loan_Test.loan_status, func.count(Bank_Loan_Test.loan_status))\
         .group_by(Bank_Loan_Test.loan_status)\
         .all()
     session.close()
 
-    # List of employment duration and list of their counts
+    # List of loan status and list of their counts
     loan_status = [stat[0] for stat in results]
     loan_status_count = [count[1] for count in results]
 
-    # Add to employment_duration_json where the key is years of employment and 
+    # Add to loan_status_json where the key is the loan status and 
     # values are their counts
     for i in range(len(loan_status)):
         if loan_status[i] == 1:

@@ -121,3 +121,8 @@ h1 {
 #model-4-panel, #graph-4-panel {
     border-bottom: 1px solid rgb(109, 109, 109);
 }
+
+.model-element {
+    font-size: 1rem;
+    margin: 5px;
+}
