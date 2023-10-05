@@ -27,8 +27,11 @@ app = Flask(__name__)
 # Do not sort keys
 # app.json.sort_keys = False
 
-# Store the table in a variable
+# Store mainDS table in a variable
 Bank_Loan_Test = Base.classes.bank_loan
+
+# Store Raph's Training record table
+Raph_Training_record = Base.classes.raph_training_record
 
 # Store column names into a variable
 inspector = inspect(Bank_Loan_Test)
@@ -43,6 +46,7 @@ def homepage():
            "Available routes:<br/>"
            "/api/v1/home_owner_type (Count of each home ownership type)<br/>"
            "/api/v1/loan_funded (Count of amounts of loans funded by category)<br/>"
+           "/api/v1/raph_training_record (Raph's Training Record Dataframe)<br/>"
            )
 
 # Route for all data in mainDS.csv
@@ -137,5 +141,36 @@ def loan_funded():
 
     return jsonify(loan_funded_json)
 
+# Route for Raph's Training record csv
+@app.route("/api/v1/raph_training_record")
+def raph_training_record():
+    # inspector = inspect(Raph_Training_record)
+    # column_names = [columns.key for columns in inspector.mapper.column_attrs]
+    # columns = [getattr(Bank_Loan_Test, column) for column in column_names]
+
+    raph_train_results_json = {}
+    # Query all results
+    session = Session(engine)
+    results_loss = session.query(Raph_Training_record.loss).all()
+    results_accuracy = session.query(Raph_Training_record.accuracy).all()
+    results_val_loss = session.query(Raph_Training_record.val_loss).all()
+    results_val_accuracy = session.query(Raph_Training_record.val_accuracy).all()
+    session.close()
+
+    # Save each column into a variable
+    loss = [elem[0] for elem in results_loss]
+    accuracy = [elem[0] for elem in results_accuracy]
+    val_loss = [elem[0] for elem in results_val_loss]
+    val_accuracy = [elem[0] for elem in results_val_accuracy]
+
+    # Define the key value pairs for the JSON
+    raph_train_results_json['Loss'] = loss
+    raph_train_results_json['Accuracy'] = accuracy
+    raph_train_results_json['Validation Accuracy'] = val_accuracy
+    raph_train_results_json['Validation Loss'] = val_loss
+
+    return jsonify(raph_train_results_json)
+
+    
 if __name__ == "__main__":
     app.run(debug=True)
