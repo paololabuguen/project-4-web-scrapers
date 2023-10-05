@@ -107,7 +107,7 @@ function employmentDurationGraph() {
         }
     })
 
-    // Access the API for the homeowner type data to plot into the donut chart
+    // Access the API for the employment duration data to plot into the donut chart
     d3.json(employmentDurationString).then(data => {
 
         // Type of home ownership
@@ -118,7 +118,7 @@ function employmentDurationGraph() {
 
         // Define the data to be plotted into the donut chart
         barData = {
-            // Set the label as home ownership type
+            // Set the label as employment duration type
             labels: barLabels,
 
             // Set the dataset
@@ -135,7 +135,7 @@ function employmentDurationGraph() {
             }]
         };
 
-        // Update the donut chart
+        // Update the bar chart
         barChart.data = barData;
         barChart.update();
     })
@@ -151,7 +151,7 @@ function loanStatusGraph() {
 
     // Define the link to access the data from the Flask API
     // This is the link to the route of the json we want, in this case,
-    // the home ownership types
+    // the loan status 
     let loanStatusString = link + "loan_status";
 
     // Get the graph-1-grid element for the graph
@@ -200,7 +200,7 @@ function loanStatusGraph() {
         }
     })
 
-    // Access the API for the homeowner type data to plot into the donut chart
+    // Access the API for the loan status data to plot into the donut chart
     // We add this to data from the donut chart we created earlier
     d3.json(loanStatusString).then(data => {
 
@@ -212,7 +212,7 @@ function loanStatusGraph() {
 
         // Define the data to be plotted into the donut chart
         donutData = {
-            // Set the label as home ownership type
+            // Set the label as loan status type
             labels: donutLabels,
 
             // Set the dataset
