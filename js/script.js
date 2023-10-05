@@ -236,8 +236,13 @@ function loanFundedGraph(oldChart) {
     })
 }
 
-// Initialize Graphs
-homeOwnerTypeGraph();
+// Function to initialize the dashboard
+function initialize() {
+    document.getElementById("graph-1").innerHTML = graphGrid1CanvasString;
+    document.getElementById("graph-2").innerHTML = graphGrid2CanvasString;
+    homeOwnerTypeGraph();
+}
+
 
 // This is the function called when you click Graph 1 on the side panel
 function graph1() {
@@ -261,6 +266,8 @@ function graph2() {
     loanFundedGraph();
 }
 
+// Initialize
+initialize();
 // Click event when the side panel options are clicked
 document.getElementById("graph-1-panel").addEventListener("click", graph1);
 document.getElementById("graph-2-panel").addEventListener("click", graph2);

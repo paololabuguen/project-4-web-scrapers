@@ -7,9 +7,6 @@
 function model1Information() {
     /** Shows info about the Machine Learning Model on the left grid */
 
-    // Define URL string in the API for the data
-    graph1String = link + 'raph_training_record';
-
     // This string is to be added to the inner HTML for the Model information
     // The classes added to the <p> elements are for customization on CSS
     // You can customize font, margins, alignment, etc.
@@ -32,7 +29,9 @@ function model1Information() {
 // Function to graph the training records colected for model 1 //
 //-------------------------------------------------------------//
 function model1Graph() {
-    // Get the graph-2-grid element for the graph
+    // Define URL string in the API for the data
+    let graph1String = link + 'raph_training_record';
+
     // We need to pass this as a param to the Chart
     let ctx = document.getElementById('graph-2-grid');
 
@@ -128,50 +127,50 @@ function model1Graph() {
             // datasets are for the y-values for the line graph
             // The customization for the lines are here as well
             datasets: [
-                
-            // First data for the line graph
-            {
-                label: 'Loss',
-                data: loss,
-                borderWidth: 2,
-                borderColor: '#497D1F',
-                backgroundColor: '#497D1F',
-                tension: 0.3,
-                pointRadius: 1
-            },
 
-            // Second data for the line graph
-            {
-                label: 'Accuracy',
-                data: accuracy,
-                borderWidth: 2,
-                borderColor: '#531F7D',
-                backgroundColor: '#531F7D',
-                tension: 0.3,
-                pointRadius: 1
-            },
+                // First data for the line graph
+                {
+                    label: 'Loss',
+                    data: loss,
+                    borderWidth: 2,
+                    borderColor: '#497D1F',
+                    backgroundColor: '#497D1F',
+                    tension: 0.3,
+                    pointRadius: 1
+                },
 
-            // Third data for the line graph
-            {
-                label: 'Validation Loss',
-                data: val_loss,
-                borderWidth: 2,
-                borderColor: '#FBAF04',
-                backgroundColor: '#FBAF04',
-                tension: 0.3,
-                pointRadius: 1
-            },
+                // Second data for the line graph
+                {
+                    label: 'Accuracy',
+                    data: accuracy,
+                    borderWidth: 2,
+                    borderColor: '#531F7D',
+                    backgroundColor: '#531F7D',
+                    tension: 0.3,
+                    pointRadius: 1
+                },
 
-            // Fourth data for the line graph
-            {
-                label: 'Validation Accuracy',
-                data: val_accuracy,
-                borderWidth: 2,
-                borderColor: '#ED12EA',
-                backgroundColor: '#ED12EA',
-                tension: 0.3,
-                pointRadius: 1
-            }]
+                // Third data for the line graph
+                {
+                    label: 'Validation Loss',
+                    data: val_loss,
+                    borderWidth: 2,
+                    borderColor: '#FBAF04',
+                    backgroundColor: '#FBAF04',
+                    tension: 0.3,
+                    pointRadius: 1
+                },
+
+                // Fourth data for the line graph
+                {
+                    label: 'Validation Accuracy',
+                    data: val_accuracy,
+                    borderWidth: 2,
+                    borderColor: '#ED12EA',
+                    backgroundColor: '#ED12EA',
+                    tension: 0.3,
+                    pointRadius: 1
+                }]
         }
 
         // Replace the data from the line chart to the data we just collected
