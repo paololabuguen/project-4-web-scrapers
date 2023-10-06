@@ -163,14 +163,25 @@ def employment_duration():
     
     # Query the employment duration and their counts
     session = Session(engine)
-    results = session.query(Bank_Loan_Test.employment_duration, func.count(Bank_Loan_Test.employment_duration))\
+    # Less than 30 years
+    results_less_30 = session.query(Bank_Loan_Test.employment_duration, func.count(Bank_Loan_Test.employment_duration))\
+        .filter(Bank_Loan_Test.employment_duration <= 30)\
         .group_by(Bank_Loan_Test.employment_duration)\
         .all()
+    # More than 30 years
+    results_more_30 = session.query(func.count(Bank_Loan_Test.employment_duration))\
+        .filter(Bank_Loan_Test.employment_duration > 30)\
+        .all()
+    
     session.close()
 
     # List of employment duration and list of their counts
-    emp_duration = [dur[0] for dur in results]
-    emp_duration_count = [count[1] for count in results]
+    emp_duration = [dur[0] for dur in results_less_30]
+    emp_duration.append('30+')
+    emp_duration_count = [count[1] for count in results_less_30]
+
+    for row in results_more_30:
+        emp_duration_count.append(row[0])
 
     # Add to employment_duration_json where the key is years of employment and 
     # values are their counts
