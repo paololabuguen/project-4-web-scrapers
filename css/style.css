@@ -143,12 +143,15 @@ h1 {
     margin: 5px;
 }
 
-#graph-1, #graph-2, #graph-3-grid, #graph-4-grid{
+#graph-1, #graph-2, #graph-3, #graph-4{
     transition: all .5s ease-in-out;
+    opacity: 0.5;
 }
 
 
-#graph-1:hover ,#graph-2:hover, #graph-3-grid:hover, #graph-4-grid:hover {
+#graph-1:hover ,#graph-2:hover, #graph-3:hover, #graph-4:hover {
     transform: scale(1.1);  
+    opacity: 1.0;
+    
 
 }
