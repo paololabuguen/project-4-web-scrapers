@@ -18,7 +18,7 @@ function model1Information() {
     htmlString += '<p class=\"model-element\">Hidden Layer 2 Activation Function: <b>ReLU</b></p>';
     htmlString += '<p class=\"model-element\">Output Layer Activation Function: <b>Sigmoid</b></p>';
     htmlString += '<p class=\"model-element\">Batch Size: <b>128</b></p>';
-    htmlString += '<p class=\"model-element\">Epochs: <b>55</b></p>';
+    htmlString += '<p class=\"model-element\">Epochs: <b>60</b></p>';
     htmlString += '<p class=\"model-element\">Validation Split: <b>0.2</b></p>';
 
     // Add to the inner HTML

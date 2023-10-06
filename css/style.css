@@ -77,12 +77,12 @@ h1 {
     height: 85%;
     min-width: 300px;
     min-height: 300px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
                   rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
                      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     
     border-radius: 20px;
-    border: 1px inset rgb(109, 109, 109);
+    border: 1px inset rgb(109, 109, 109); */
     background-color: rgb(221, 221, 221);
     align-items: center;
     text-align: center;
@@ -153,29 +153,29 @@ h1 {
 
 #graph-1, #graph-2, #graph-3, #graph-4{
     transition: all .5s ease-in-out;
-    opacity: 0.6;
-    background-image: url() ;
-
-    /*Glass-Like Style Container*/
-    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5); 
-    border-radius: 10px;
+    opacity: .6;
+ 
+    /*Glass-Like Style Container */
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .55); 
+    border-radius: 8px;
     position: relative;
     z-index: 1;
-    background: inherit;
+    background:inherit;
     overflow: hidden;
+    
 }
 
 
 #graph-1:hover ,#graph-2:hover, #graph-3:hover, #graph-4:hover {
     transform: scale(1.1);  
     opacity: 1.0;
-    
+    box-shadow: 0 0 1rem 0 rgb(150, 241, 255); 
 
 }
 
-/* Glass-like Style */
+/* Glass-like Style  */
 
-  #graph-1:before, #graph-2:before, #graph-3:before, #graph-4:before {
+  #grid-elem:before {
     content: "";
     position: absolute;
     background: inherit;
@@ -185,8 +185,8 @@ h1 {
     right: 0;
     bottom: 0;
     box-shadow: inset 0 0 2000px rgba(255, 255, 255, 1);
-    filter: blur(20px);
+    filter: blur(10px);
     margin: -30px;
-  }
-  
+  }  
+ 
 
