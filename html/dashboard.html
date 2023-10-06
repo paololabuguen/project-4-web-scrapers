@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Project 4 - Predicting Bank Loan Defaulting</title>
+
+    <!-- D3 library -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+
+    <!-- Chart.js library -->
+    <!-- We might need to use Chart.js to graph some stuff -->
+    <!-- Version 3.9.1 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+
+</head>
+
+<body>
+    <div class="header-box">
+        <h1>Predicting Bank Loan Defaulting</h1>
+    </div>
+
+    <div class="grid">
+        <div class="side-panel">
+            <!-- Side panel list for the models that will be shown -->
+            <ul class="side-panel-list-1">
+                <h3 class="side-panel-header">Select Model</h3>
+
+                <!-- Clickable options for the models -->
+                <li class="model-item" id="model-1-panel" onclick="">Model 1</li>
+                <li class="model-item" id="model-2-panel">Model 2</li>
+                <li class="model-item" id="model-3-panel">Model 3</li>
+                <li class="model-item" id="model-4-panel">Model 4</li>
+            </ul>
+
+            <!-- Side panel list for optional graphs -->
+            <ul class="side-panel-list-2">
+                <h3 class="side-panel-header">About the Dataset</h3>
+
+                <!-- Clickable options for the data graphs -->
+                <li class="model-item" id="graph-1-panel">Graph 1</li>
+                <li class="model-item" id="graph-2-panel">Graph 2</li>
+                <li class="model-item" id="graph-3-panel">Graph 3</li>
+                <li class="model-item" id="graph-4-panel">Graph 4</li>
+            </ul>
+        </div>
+
+        <div class="grid-container" id="grid-container">
+        <!--     <div class="grid-elem" id="graph-1"></div>
+            <div class="grid-elem" id="graph-2"></div>
+            <div class="grid-elem" id="graph-3-grid">Graph/Text 3</div>
+            <div class="grid-elem" id="graph-4-grid">Graph/Text 4</div>  -->
+        </div>
+
+    </div>
+
+</body>
+
+<!-- Our Javascript code -->
+<script type="text/javascript" src="../js/script.js"></script>
+<script type="text/javascript" src="../js/model1.js"></script>
+
+
+</html>

@@ -1,0 +1,192 @@
+/* ---- */
+/* Body */
+/* ---- */
+body {
+    background: url(https://img.freepik.com/free-vector/glowing-particles-gradient-background_1217-1381.jpg?w=1800&t=st=1696565533~exp=1696566133~hmac=687ab33b99ec3553b888a7070399ee666cc6d02aa5c09320cb1ad88b4a83ccc2) no-repeat;
+
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-width: 500px;
+    min-height: 500px;
+    /* background-color: #7c677f; */
+}
+
+
+
+/* ------------ */
+/* Header Style */
+/* ------------ */
+.header-box {
+    width: 100%;
+    height: 10vh;
+    min-height: 50px;
+    min-width: 1220px;
+    
+    background-color: white;
+    border-bottom: 1px solid black;
+    text-align: center;
+    position: fixed;
+
+    /* background-color: #9bc400; */
+}
+
+h1 {
+    margin: 2vh 0px 0px 0px;
+    font-size: 2rem;
+    font: Georgia;
+    text-align: center;
+}
+
+/* ------------------------ */
+/* Visualization Grid Style */
+/* ------------------------ */
+.grid {
+    padding: 0px 200px 0px 0px;
+    display: flex;
+    height: 100%;
+
+    /* background-color: #7c677f; */
+}
+
+
+.grid-container {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    height: 80vh;
+    width: 100%;
+
+    padding: 40px 0px 0px 350px;
+
+    justify-items: stretch;
+    place-self: center;
+    
+    min-width: 300px;
+    min-height: 300px;
+    column-gap: 50px;
+    row-gap: 30px;
+    margin-top: 10vh;
+
+}
+
+
+.grid-elem {
+    width: 80%;
+    height: 85%;
+    min-width: 300px;
+    min-height: 300px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+                  rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+                     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    
+    border-radius: 20px;
+    border: 1px inset rgb(109, 109, 109);
+    background-color: rgb(221, 221, 221);
+    align-items: center;
+    text-align: center;
+    padding: 30px;
+} 
+
+
+
+#graph-1-grid-text {
+    height: 100%;
+    width: 100%;
+}
+
+
+/* ---------------- */
+/* Side panel style */
+/* ---------------- */
+
+.side-panel {
+    /* background-color: #8076a3; */
+    width: 200px;
+    height: 92vh;
+
+    margin: 10vh 50px 0px 0px;
+
+    border-right: 1px solid black;
+    position: fixed;
+    
+}
+
+.side-panel-list-1, .side-panel-list-2 {
+    list-style-type: none;
+    padding: 0px;
+
+
+}
+
+.side-panel-header {
+    padding-left: 10px;
+}
+
+.model-item {
+    background-color: rgb(199, 199, 199);
+    background-blend-mode: soft-light;
+    padding: 10px;
+    border-top: 1px solid rgb(109, 109, 109);
+    box-shadow: inset 0 0 0 0 #54b3d6;
+    color: #000000;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+}
+
+.model-item:hover {
+    /* background-color: beige; */
+    box-shadow: inset 200px 0 0 0 beige;
+    cursor: pointer;
+    /* background-color: #9f94ca; */
+    
+}
+
+#model-4-panel, #graph-4-panel {
+    border-bottom: 1px solid rgb(109, 109, 109);
+}
+
+.model-element {
+    font-size: 1rem;
+    margin: 5px;
+}
+
+#graph-1, #graph-2, #graph-3, #graph-4{
+    transition: all .5s ease-in-out;
+    opacity: 0.6;
+    background-image: url() ;
+
+    /*Glass-Like Style Container*/
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5); 
+    border-radius: 10px;
+    position: relative;
+    z-index: 1;
+    background: inherit;
+    overflow: hidden;
+}
+
+
+#graph-1:hover ,#graph-2:hover, #graph-3:hover, #graph-4:hover {
+    transform: scale(1.1);  
+    opacity: 1.0;
+    
+
+}
+
+/* Glass-like Style */
+
+  #graph-1:before, #graph-2:before, #graph-3:before, #graph-4:before {
+    content: "";
+    position: absolute;
+    background: inherit;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 2000px rgba(255, 255, 255, 1);
+    filter: blur(20px);
+    margin: -30px;
+  }
+  
+
