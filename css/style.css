@@ -11,6 +11,7 @@ body {
 }
 
 
+
 /* ------------ */
 /* Header Style */
 /* ------------ */
@@ -58,11 +59,13 @@ h1 {
 
     justify-items: stretch;
     place-self: center;
-
+    
     min-width: 300px;
     min-height: 300px;
-    gap: 50px;
+    column-gap: 50px;
+    row-gap: 30px;
     margin-top: 10vh;
+
 }
 
 .grid-elem {
@@ -70,9 +73,10 @@ h1 {
     height: 85%;
     min-width: 300px;
     min-height: 300px;
-
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    
     border-radius: 20px;
-    border: 1px solid rgb(109, 109, 109);
+    border: 1px inset rgb(109, 109, 109);
     background-color: rgb(221, 221, 221);
     align-items: center;
     text-align: center;
@@ -98,11 +102,14 @@ h1 {
 
     border-right: 1px solid black;
     position: fixed;
+    
 }
 
 .side-panel-list-1, .side-panel-list-2 {
     list-style-type: none;
     padding: 0px;
+
+
 }
 
 .side-panel-header {
@@ -112,10 +119,16 @@ h1 {
 .model-item {
     padding: 10px;
     border-top: 1px solid rgb(109, 109, 109);
+    box-shadow: inset 0 0 0 0 #54b3d6;
+    color: #000000;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
 }
+
 .model-item:hover {
-    background-color: beige;
+    /* background-color: beige; */
+    box-shadow: inset 200px 0 0 0 beige;
     /* background-color: #9f94ca; */
+    
 }
 
 #model-4-panel, #graph-4-panel {

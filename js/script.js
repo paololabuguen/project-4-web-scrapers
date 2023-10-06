@@ -461,6 +461,9 @@ function homeOwnerTypeGraph() {
 
 }
 
+//-----------------------------------------------//
+//  Functions to change number of grid elements  //
+//-----------------------------------------------//
 // This function creates 2 grid elements
 function grid2() {
     document.getElementById('grid-container').innerHTML = gridElements2
@@ -471,6 +474,9 @@ function grid4() {
     document.getElementById('grid-container').innerHTML = gridElements4
 }
 
+//---------------------------------------------------------------//
+// Function to graph the visualizations when you click the panel //
+//---------------------------------------------------------------//
 // This is the function called when you click Graph 1 on the side panel
 function graph1() {
     // Want only 2 grid elements
