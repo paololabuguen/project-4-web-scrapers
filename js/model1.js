@@ -18,7 +18,7 @@ function model1Information() {
     htmlString += '<p class=\"model-element\">Hidden Layer 2 Activation Function: <b>ReLU</b></p>';
     htmlString += '<p class=\"model-element\">Output Layer Activation Function: <b>Sigmoid</b></p>';
     htmlString += '<p class=\"model-element\">Batch Size: <b>128</b></p>';
-    htmlString += '<p class=\"model-element\">Epochs: <b>55</b></p>';
+    htmlString += '<p class=\"model-element\">Epochs: <b>60</b></p>';
     htmlString += '<p class=\"model-element\">Validation Split: <b>0.2</b></p>';
 
     // Add to the inner HTML
@@ -148,8 +148,117 @@ function model1Graph() {
                     backgroundColor: '#531F7D',
                     tension: 0.3,
                     pointRadius: 1
+                }]
+        }
+
+        // Replace the data from the line chart to the data we just collected
+        // Update the graph
+        lineGraph.data = lineData;
+        lineGraph.update();
+    })
+}
+
+function model2Graph() {
+    // Define URL string in the API for the data
+    let graph2String = link + 'raph_training_record';
+
+    // We need to pass this as a param to the Chart
+    let ctx = document.getElementById('graph-4-grid');
+
+    // Set up a new Chart.js line graph
+    // You can customize the graph here if you'd like
+    // The version of Chart.js is 3.9.1 so be careful of documentation
+    // Some old posts on stackoverflow might only work for older versions
+    lineGraph2 = new Chart(ctx, {
+        type: 'line',
+
+        // Data to add later
+        data: {},
+
+        options: {
+            // Want the graph to stay inside the div container
+            responsive: true,
+            maintainAspectRatio: false,
+
+            // This part is for title customization
+            // Chart.js kind of has a weird customization process. Try to look at the 
+            // documentation if you want to change these
+            plugins: {
+
+                // Configurations for the title
+                title: {
+                    color: 'black',
+                    font: {
+                        size: 20
+                    },
+                    display: true,
+                    text: 'Training Record'
                 },
 
+                // Legends for each of the lines
+                legend: {
+                    labels: {
+                        color: 'black'
+                    }
+                }
+            },
+
+            scales: {
+
+                // Configurations for y axis
+                y: {
+                    ticks: {
+                        color: 'black'
+                    },
+                },
+
+                // Configurations for x axis
+                x: {
+
+                    // Labels
+                    title: {
+                        color: 'black',
+                        font: {
+                            size: 15
+                        },
+                        display: true,
+                        text: 'Epochs'
+                    },
+                    // We do not want to display the x gridlines
+                    grid: {
+                        display: false,
+
+                    },
+
+                    ticks: {
+                        color: 'black'
+                    }
+                }
+            },
+        }
+    });
+
+    d3.json(graph2String).then(data => {
+
+        // Retrieving information from dataframe
+        // You can look in the API how this JSON is formatted
+        // x is just nuber of epochs
+        x = [...Array(data['Loss'].length).keys()];
+        loss = data['Loss'];
+        accuracy = data['Accuracy'];
+        val_loss = data['Validation Loss'];
+        val_accuracy = data['Validation Accuracy'];
+
+        // Data to be added to the graph
+        lineData = {
+            // Labels are for the x-tick values
+            labels: x,
+
+            // datasets are for the y-values for the line graph
+            // The customization for the lines are here as well
+            datasets: [
+
+                
                 // Third data for the line graph
                 {
                     label: 'Validation Loss',
@@ -175,8 +284,8 @@ function model1Graph() {
 
         // Replace the data from the line chart to the data we just collected
         // Update the graph
-        lineGraph.data = lineData;
-        lineGraph.update();
+        lineGraph2.data = lineData;
+        lineGraph2.update();
     })
 }
 
@@ -190,10 +299,12 @@ function model1() {
     // grid to the new items from this model
     document.getElementById("graph-1").innerHTML = graphGrid1TextString;
     document.getElementById("graph-2").innerHTML = graphGrid2CanvasString;
-
+    document.getElementById("graph-4").innerHTML = graphGrid4CanvasString;
+    
     // Call the functions to fill the grid elements
     model1Information();
     model1Graph();
+    model2Graph(); 
 }
 
 // Click event when the side panel options are clicked
