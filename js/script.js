@@ -10,6 +10,9 @@ const link = "http://127.0.0.1:5000/api/v1/";
 // side panel.
 const graphGrid1CanvasString = '<canvas id=\"graph-1-grid\"></canvas>';
 const graphGrid2CanvasString = '<canvas id=\"graph-2-grid\"></canvas>';
+
+const graphGrid4CanvasString = '<canvas id=\"graph-4-grid\"></canvas>';
+
 const graphGrid1TextString = '<div id=\"graph-1-grid-text\"></div>';
 const graphGrid2TextString = '<div id=\"graph-2-grid-text\"></div>';
 
