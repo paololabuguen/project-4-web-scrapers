@@ -1,4 +1,4 @@
-// This script is for Model 2 (Amjad's Model)
+// This script is for Model 2 (Judsica's Model)
 
 //---------------------------------------------------------//
 // Function to show information about the model in model 1 //
