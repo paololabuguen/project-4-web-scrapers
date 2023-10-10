@@ -10,7 +10,7 @@ const link = "http://127.0.0.1:5000/api/v1/";
 // side panel.
 const graphGrid1CanvasString = '<canvas id=\"graph-1-grid\"></canvas>';
 const graphGrid2CanvasString = '<canvas id=\"graph-2-grid\"></canvas>';
-
+const graphGrid3CanvasString = '<canvas id=\"graph-3-grid\"></canvas>';
 const graphGrid4CanvasString = '<canvas id=\"graph-4-grid\"></canvas>';
 
 const graphGrid1TextString = '<div id=\"graph-1-grid-text\"></div>';
@@ -19,6 +19,8 @@ const graphGrid2TextString = '<div id=\"graph-2-grid-text\"></div>';
 const gridElements2 = '<div class=\"grid-elem\" id=\"graph-1\"></div><div class=\"grid-elem\" id=\"graph-2\"></div>'
 
 const gridElements4 = '<div class=\"grid-elem\" id=\"graph-1\"></div><div class=\"grid-elem\" id=\"graph-2\"></div><div class=\"grid-elem\" id=\"graph-3\"></div><div class=\"grid-elem\" id=\"graph-4\"></div>'
+
+const gridElements6 = '<div class=\"grid-elem\" id=\"graph-5\"></div></div><div class=\"grid-elem\" id=\"graph-6\"></div>'
 //-----------------------------------------------//
 //  Function to graph the bar chart for graph 1  //
 //-----------------------------------------------//
@@ -113,7 +115,7 @@ function employmentDurationGraph() {
         }
     })
 
-    // Access the API for the employment duration data to plot into the donut chart
+    // Access the API for the employment duration data to plot into the bar chart
     d3.json(employmentDurationString).then(data => {
 
         // Type of home ownership
@@ -122,7 +124,7 @@ function employmentDurationGraph() {
         // Values for each type
         barValues = Object.values(data);
 
-        // Define the data to be plotted into the donut chart
+        // Define the data to be plotted into the bar chart
         barData = {
             // Set the label as employment duration type
             labels: barLabels,
@@ -469,14 +471,20 @@ function homeOwnerTypeGraph() {
 //-----------------------------------------------//
 // This function creates 2 grid elements
 function grid2() {
-    document.getElementById('grid-container').innerHTML = gridElements2
+    document.getElementById('grid-container').innerHTML = gridElements2;
 }
 
 // This function creates 4 grid elements 
 function grid4() {
-    document.getElementById('grid-container').innerHTML = gridElements4
+    document.getElementById('grid-container').innerHTML = gridElements4;
 }
 
+// This function creates 4 grid elements 
+// function grid6() {
+//     document.getElementById('body').innerHTML += '<div class=\"grid-2\"><div class=\"grid-container-2\" id=\"grid-container-2\"></div></div>'
+//     document.getElementById('grid-container-1').innerHTML = gridElements4;
+//     document.getElementById('grid-container-2').innerHTML = gridElements6;
+// }
 //---------------------------------------------------------------//
 // Function to graph the visualizations when you click the panel //
 //---------------------------------------------------------------//
