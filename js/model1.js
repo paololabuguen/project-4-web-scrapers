@@ -13,7 +13,7 @@ function model1Information() {
     htmlString = '<h3>Model 1 Analysis - Neural Network Model</h3><hr>';
     htmlString += '<p class=\"model-element\">Hidden Layers: <b>2</b></p>';
     htmlString += '<p class=\"model-element\">Hidden Layer 1 Nodes: <b>100</b></p>';
-    htmlString += '<p class=\"model-element\">Hidden Layer 1 Nodes: <b>100</b></p>';
+    htmlString += '<p class=\"model-element\">Hidden Layer 2 Nodes: <b>100</b></p>';
     htmlString += '<p class=\"model-element\">Hidden Layer 1 Activation Function: <b>ReLU</b></p>';
     htmlString += '<p class=\"model-element\">Hidden Layer 2 Activation Function: <b>ReLU</b></p>';
     htmlString += '<p class=\"model-element\">Output Layer Activation Function: <b>Sigmoid</b></p>';
