@@ -38,6 +38,7 @@ h1 {
     font-size: 2rem;
     font: Georgia;
     text-align: center;
+    
 }
 
 /* ------------------------ */
@@ -59,9 +60,7 @@ h1 {
 
     height: 80vh;
     width: 100%;
-
     padding: 40px 0px 0px 350px;
-
     justify-items: stretch;
     place-self: center;
     
@@ -147,6 +146,7 @@ h1 {
 
 #model-4-panel, #graph-4-panel {
     border-bottom: 1px solid rgb(109, 109, 109);
+    
 }
 
 .model-element {
@@ -163,21 +163,24 @@ h1 {
     border-radius: 10px;
     position: relative;
     z-index: 1;
+
     /*Use inherit if you want glass-like style
     background: relative; */
     background-color: #cfdfea;
     overflow: hidden;
-}
 
-#graph-3 {
-    background-image: inherit;
-}
+    /* Background for Containers*/
+    background-image: url(https://st2.depositphotos.com/3205185/10331/v/450/depositphotos_103314670-stock-illustration-abstract-geometric-background-with-connecting.jpg);
+    background-position: bottom;
+    background-blend-mode: lighten;
 
+}
 
 #graph-1:hover ,#graph-2:hover, #graph-3:hover, #graph-4:hover {
     transform: scale(1.1);  
     opacity: 1.0;
     box-shadow: 0 0 1rem 0 rgb(150, 241, 255); 
+    background-position:center;
     backface-visibility: hidden;
 
 }

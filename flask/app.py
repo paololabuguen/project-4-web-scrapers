@@ -3,6 +3,8 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func, inspect
+import tensorflow
+from tensorflow.keras.models import load_model
 
 from pathlib import Path
 import tensorflow
@@ -329,6 +331,31 @@ def model_1():
 #                 'Balanced Accuracy Score': float(score)}
 
 #     return jsonify(score_json)
+
+#####################################################
+###             Route for Loan Status             ###
+#####################################################
+@app.route("/api/v1/open_credit_line")
+def open_credit_line():
+    # Object for the data to be returned as a JSON
+    open_credit_json = {}
+
+    # Query the open credit line and their counts
+    session = Session(engine)
+    results = session.query(Bank_Loan_Test.open_account, func.count(Bank_Loan_Test.open_account))\
+        .group_by(Bank_Loan_Test.open_account)\
+        .all()
+    session.close()
+    # List of loan status and list of their counts
+    open_credit = [stat[0] for stat in results]
+    open_credit_count = [count[1] for count in results]
+
+    # Add to loan_status_json where the key is the loan status and 
+    # values are their counts
+    for i in range(len(open_credit)):
+        open_credit_json[open_credit[i]] = open_credit_count[i]
+    
+    return jsonify(open_credit_json)
 
 #####################################################
 ###      Route for Raph's Training record csv     ###
