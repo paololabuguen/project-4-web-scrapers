@@ -69,8 +69,6 @@ h1 {
     column-gap: 50px;
     row-gap: 30px;
     margin-top: 10vh;
-    
-
 }
 
 
@@ -122,9 +120,6 @@ h1 {
 .side-panel-list-1, .side-panel-list-2 {
     list-style-type: none;
     padding: 0px;
-    
-
-
 }
 
 .side-panel-header {
@@ -186,10 +181,9 @@ h1 {
     opacity: 1.0;
     box-shadow: 0 0 1rem 0 rgb(150, 241, 255); 
     background-position:center;
-
+    backface-visibility: hidden;
 
 }
-
 
 /* Table */
 
