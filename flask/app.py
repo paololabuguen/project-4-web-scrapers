@@ -41,6 +41,8 @@ app.json.sort_keys = False
 Bank_Loan_Test = Base.classes.bank_loan
 
 # Store Raph's Training record table
+Raph_X_Test = Base.classes.raph_X_test
+Raph_y_Test = Base.classes.raph_y_test
 Raph_Training_record = Base.classes.raph_training_record
 
 # Store column names into a variable
@@ -263,6 +265,42 @@ def open_credit_line():
 #####################################################
 @app.route("/api/v1/model_1")
 def model_1():
+    # Links for the data
+    model_1_link = 'Resources/Raph_Model_Files/Saved_Models/raph-model.h5'
+    X_test_link = 'Resources/Raph_Model_Files/Splits/X_test.csv'
+    y_test_link = 'Resources/Raph_Model_Files/Splits/y_test.csv'
+
+    prediction_id = {0: "Non-Defaulter", 1: "Defaulter"}
+    # Create separate dataframes for the X_test and y_test
+    X_test = pd.read_csv(Path(X_test_link))
+    y_test = pd.read_csv(Path(y_test_link))
+
+    # Generate a random index
+    random_row = X_test.sample()
+    random_index = random_row.index
+
+    # Load the model
+    model = load_model(model_1_link)
+
+    # # Make predictions to a random rown and X_test
+    prediction_row = model.predict(random_row)
+    prediction = model.predict(X_test)
+
+    # Balanced Accuracy score
+    score = balanced_accuracy_score(y_test, prediction)
+
+    y_test.iloc[random_index, 0].values[0]
+    # Dictionary to jsonify
+    score_json = {'Row Number on Test Dataframe': int(random_index[0]), 'Predicted': prediction_id[int(prediction_row[0][0])], 'Actual': prediction_id[int(y_test.iloc[random_index,0].values[0])],
+              'Balanced Accuracy Score': float(score)}
+
+    return jsonify(score_json)
+
+#####################################################
+###        Route for Model 1 h5 Prediction        ###
+#####################################################
+@app.route("/api/v1/model_2")
+def model_2():
     # Links for the data
     model_1_link = 'Resources/Raph_Model_Files/Saved_Models/raph-model.h5'
     X_test_link = 'Resources/Raph_Model_Files/Splits/X_test.csv'
