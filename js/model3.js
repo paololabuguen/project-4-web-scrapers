@@ -9,11 +9,8 @@ function model3Information() {
     htmlString = '<h3>Model 3 Analysis - Random Forest</h3><hr>';
     htmlString += '<p class=\"model-element\">First, we did a RandomizedSearchCV for the RandomForestClassifier and found best parameters</p><hr>';
     htmlString += '<p class=\"model-element\"><b>Best Params</b></p>';
-    // htmlString += '<p class=\"model-element\">n_estimators: <b>60</b></p>';
-    // htmlString += '<p class=\"model-element\">min_samples_split: <b>100</b></p>';
-    // htmlString += '<p class=\"model-element\">min_samples_leaf: <b>5</b></p>';
-    // htmlString += '<p class=\"model-element\">max_features: <b>sqrt</b></p>';
-    // htmlString += '<p class=\"model-element\">max_depth: <b>20</b></p><hr>';
+
+    // Table
     htmlString += '<table class=\"model-3-table\" id = \"model-3-table-1\">'
 
     // Row 1
@@ -57,6 +54,7 @@ function model3Prediction() {
         columnsGrid4 = Object.keys(rowPrediction);
         valuesGrid4 = Object.values(rowPrediction);
 
+        grid3String +='<h3>Random Row Information</h3><hr>'
         // Grid 3 elements
         grid3String += '<table class=\"model-3-table\" id = \"model-3-table-2\">';
 

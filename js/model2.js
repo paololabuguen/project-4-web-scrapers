@@ -29,11 +29,6 @@ function model2Information() {
     htmlString += '<td class=\"model-2-table-element-info\">0.5</td></tr>'
 
     htmlString += '</table>'
-    // htmlString += '</table>'
-    // htmlString += '<p class=\"model-element\">Dropped Columns: <b>11</b></p>';
-    // htmlString += '<p class=\"model-element\" id=\"model-2-dropped\">Grade, Batch Enrolled, Sub Grade, Employment Duration, Application Type, Verification Status, Payment Plan, Loan Title, ID, Initial List Status</p>';
-    // htmlString += '<p class=\"model-element\">Random State: <b>1</b></p>';
-    // htmlString += '<p class=\"model-element\">Balanced Acuracy Score: <b>0.5</b></p><hr>';
 
     htmlString += '<h3>Confusion Matrix</h3><hr>';
 
@@ -129,7 +124,8 @@ function model2Prediction() {
         valuesGrid3 = Object.values(rowInfo);
         columnsGrid4 = Object.keys(rowPrediction);
         valuesGrid4 = Object.values(rowPrediction);
-
+        
+        grid3String +='<h3>Random Row Information</h3><hr>'
         // Grid 3 elements
         grid3String += '<table class=\"model-2-table\" id = \"model-2-table-2\">';
 
@@ -155,7 +151,6 @@ function model2Prediction() {
     document.getElementById("graph-4-grid-text").innerHTML = grid4String;
     })
     
-    console.log(htmlString)
 }
 
 function model2() {
