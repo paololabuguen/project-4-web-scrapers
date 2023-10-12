@@ -270,16 +270,26 @@ def model_1():
     model_1_link = 'Resources/Raph_Model_Files/Saved_Models/raph-model.h5'
     X_test_link = 'Resources/Raph_Model_Files/Splits/X_test.csv'
     y_test_link = 'Resources/Raph_Model_Files/Splits/y_test.csv'
+    X_test_row_link = 'Resources/Raph_Model_Files/Splits/X_test_newf.csv'
 
     prediction_id = {0: "Non-Defaulter", 1: "Defaulter"}
     # Create separate dataframes for the X_test and y_test
     X_test = pd.read_csv(Path(X_test_link)).drop(columns=['index'])
     y_test = pd.read_csv(Path(y_test_link)).drop(columns=['index'])
+    X_test_row = pd.read_csv(Path(X_test_row_link)).drop(columns=['index'])
+
+    score_json = {'info': {}, 'predict':{}}
 
     # Generate a random index
     random_row = X_test.sample()
     random_index = random_row.index
 
+    col_names = list(X_test_row.iloc[random_index].keys())
+    col_values = list(X_test_row.iloc[random_index].values[0])
+
+    for i in range(len(col_names)):
+        score_json['info'][col_names[i]] = col_values[i]
+    
     # Load the model
     model = load_model(model_1_link)
 
@@ -292,7 +302,7 @@ def model_1():
 
     y_test.iloc[random_index, 0].values[0]
     # Dictionary to jsonify
-    score_json = {'Row Number on Test Dataframe': int(random_index[0]), 'Predicted': prediction_id[int(prediction_row[0][0])], 'Actual': prediction_id[int(y_test.iloc[random_index,0].values[0])],
+    score_json['predict'] = {'Row Number on Test Dataframe': int(random_index[0]), 'Predicted': prediction_id[int(prediction_row[0][0])], 'Actual': prediction_id[int(y_test.iloc[random_index,0].values[0])],
               'Balanced Accuracy Score': float(score)}
 
     return jsonify(score_json)
@@ -394,6 +404,9 @@ def model_3():
 
     return jsonify(score_json)
 
+#####################################################
+###        Route for Model 4 h5 Prediction        ###
+#####################################################
 @app.route("/api/v1/model_4")
 def model_4():
     # Links for the data
