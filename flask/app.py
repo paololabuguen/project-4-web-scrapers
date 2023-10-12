@@ -3,14 +3,10 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func, inspect
-
-from pathlib import Path
 import tensorflow
-
-import joblib
-
 from tensorflow.keras.models import load_model
 
+from pathlib import Path
 from sklearn.metrics import balanced_accuracy_score
 import random
 
@@ -402,3 +398,4 @@ def raph_training_record():
     
 if __name__ == "__main__":
     app.run(debug=True)
+    
