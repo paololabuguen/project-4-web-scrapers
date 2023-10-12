@@ -267,7 +267,7 @@ def open_credit_line():
 @app.route("/api/v1/model_1")
 def model_1():
     # Links for the data
-    model_1_link = 'Resources/Raph_Model_Files/Saved_Models/raph-model.h5'
+    model_1_link = 'Resources/Raph_Model_Files/Saved_Models/model_1.h5'
     X_test_link = 'Resources/Raph_Model_Files/Splits/X_test.csv'
     y_test_link = 'Resources/Raph_Model_Files/Splits/y_test.csv'
     X_test_row_link = 'Resources/Raph_Model_Files/Splits/X_test_newf.csv'
@@ -291,9 +291,11 @@ def model_1():
         score_json['info'][col_names[i]] = col_values[i]
     
     # Load the model
-    model = load_model(model_1_link)
+    with open(model_1_link,'rb') as file:
+        model = joblib.load(file)
+    # model = load_model(model_1_link)
 
-    # # Make predictions to a random rown and X_test
+    # Make predictions to a random rown and X_test
     prediction_row = model.predict(random_row)
     prediction = model.predict(X_test)
 
