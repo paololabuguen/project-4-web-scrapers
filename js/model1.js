@@ -11,15 +11,7 @@ function model1Information() {
     // The classes added to the <p> elements are for customization on CSS
     // You can customize font, margins, alignment, etc.
     tableString = '<h3>Model 1 Analysis - Neural Network Model</h3><hr>';
-    // htmlString += '<p class=\"model-element\">Hidden Layers: <b>2</b></p>';
-    // htmlString += '<p class=\"model-element\">Hidden Layer 1 Nodes: <b>100</b></p>';
-    // htmlString += '<p class=\"model-element\">Hidden Layer 2 Nodes: <b>100</b></p>';
-    // htmlString += '<p class=\"model-element\">Hidden Layer 1 Activation Function: <b>ReLU</b></p>';
-    // htmlString += '<p class=\"model-element\">Hidden Layer 2 Activation Function: <b>ReLU</b></p>';
-    // htmlString += '<p class=\"model-element\">Output Layer Activation Function: <b>Sigmoid</b></p>';
-    // htmlString += '<p class=\"model-element\">Batch Size: <b>128</b></p>';
-    // htmlString += '<p class=\"model-element\">Epochs: <b>60</b></p>';
-    // htmlString += '<p class=\"model-element\">Validation Split: <b>0.2</b></p><hr>';
+    
     // Create a table for the data
     tableString += '<table class=\"model-1-table\" id = \"model-1-table-1\">'
 

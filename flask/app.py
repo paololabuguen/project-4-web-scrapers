@@ -394,6 +394,39 @@ def model_3():
 
     return jsonify(score_json)
 
+@app.route("/api/v1/model_4")
+def model_4():
+    # Links for the data
+    model_4_link = 'Resources/Neel_Files/log_reg_model.h5'
+    X_test_link = 'Resources/Neel_Files/X_test.csv'
+    y_test_link = 'Resources/Neel_Files/y_test.csv'
+
+    prediction_id = {0: "Non-Defaulter", 1: "Defaulter"}
+    # Create separate dataframes for the X_test and y_test
+    X_test = pd.read_csv(Path(X_test_link))
+    y_test = pd.read_csv(Path(y_test_link))
+
+    # Generate a random index
+    random_row = X_test.sample()
+    random_index = random_row.index
+
+    # Load the model
+    model = load_model(model_4_link)
+
+    # # Make predictions to a random rown and X_test
+    prediction_row = model.predict(random_row)
+    prediction = model.predict(X_test)
+
+    # Balanced Accuracy score
+    score = balanced_accuracy_score(y_test, prediction)
+
+    y_test.iloc[random_index, 0].values[0]
+    # Dictionary to jsonify
+    score_json = {'Row Number on Test Dataframe': int(random_index[0]), 'Predicted': prediction_id[int(prediction_row[0][0])], 'Actual': prediction_id[int(y_test.iloc[random_index,0].values[0])],
+              'Balanced Accuracy Score': float(score)}
+
+    return jsonify(score_json)
+
 #####################################################
 ###      Route for Raph's Training record csv     ###
 #####################################################

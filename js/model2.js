@@ -116,19 +116,65 @@ function model2ClassificationReport() {
     document.getElementById("graph-2-grid-text").innerHTML = tableString;
 }
 
+function model2Prediction() {
+    // Create a button
+    predictionUrl = link + '/model_2';
+    grid3String = '<button type=\"button\" onclick=model2Prediction()>Random Row</button>';
+
+    d3.json(predictionUrl).then(data => {
+        rowInfo = data.info;
+        rowPrediction = data.predict;
+
+        columnsGrid3 = Object.keys(rowInfo);
+        valuesGrid3 = Object.values(rowInfo);
+        columnsGrid4 = Object.keys(rowPrediction);
+        valuesGrid4 = Object.values(rowPrediction);
+
+        // Grid 3 elements
+        grid3String += '<table class=\"model-2-table\" id = \"model-2-table-2\">';
+
+        for(i=0; i < columnsGrid3.length; i++) {
+            grid3String += '<tr class=\"model-2-row\">';
+            grid3String += `<td class=\"model-2-table-element\" id=\"model-2-table-left\">${columnsGrid3[i]}</td>`;
+            grid3String += `<td class=\"model-2-table-element\">${valuesGrid3[i]}</td></tr>`;
+        }
+        grid3String += '</table>';
+        
+        // Grid 4 elements
+        grid4String = '<h3>Predictions on Random Row</h3><hr>';
+        grid4String += '<table class=\"model-2-table\" id = \"model-2-table-2\">';
+
+        for(i=0; i < columnsGrid4.length; i++) {
+            grid4String += '<tr class=\"model-2-row\">';
+            grid4String += `<td class=\"model-2-table-element\" id=\"model-2-table-left\">${columnsGrid4[i]}</td>`;
+            grid4String += `<td class=\"model-2-table-element\">${valuesGrid4[i]}</td></tr>`;
+        }
+        grid4String += '</table>';
+
+    document.getElementById("graph-3-grid-text").innerHTML = grid3String;
+    document.getElementById("graph-4-grid-text").innerHTML = grid4String;
+    })
+    
+    console.log(htmlString)
+}
 
 function model2() {
     // Want 4 grid elements
     grid4();
+    htmlString = '<button type=\"button\" onclick=model2Prediction()>Random Row</button>';
     // Refresh the grid elements
     // Replacing the inner HTML makes it possible to change the items contained in the
     // grid to the new items from this model
     document.getElementById("graph-1").innerHTML = graphGrid1TextString;
     document.getElementById("graph-2").innerHTML = graphGrid2TextString;
+    document.getElementById("graph-3").innerHTML = graphGrid3TextString;
+    document.getElementById("graph-4").innerHTML = graphGrid4TextString;
 
+    document.getElementById("graph-3-grid-text").innerHTML = htmlString;
     // Call the functions to fill the grid elements
     model2Information();
     model2ClassificationReport();
+    model2Prediction();
 }
 
 // Click event when the side panel options are clicked

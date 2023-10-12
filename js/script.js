@@ -15,12 +15,13 @@ const graphGrid4CanvasString = '<canvas id=\"graph-4-grid\"></canvas>';
 
 const graphGrid1TextString = '<div id=\"graph-1-grid-text\"></div>';
 const graphGrid2TextString = '<div id=\"graph-2-grid-text\"></div>';
+const graphGrid3TextString = '<div id=\"graph-3-grid-text\"></div>';
+const graphGrid4TextString = '<div id=\"graph-4-grid-text\"></div>';
 
 const gridElements2 = '<div class=\"grid-elem\" id=\"graph-1\"></div><div class=\"grid-elem\" id=\"graph-2\"></div>'
 
 const gridElements4 = '<div class=\"grid-elem\" id=\"graph-1\"></div><div class=\"grid-elem\" id=\"graph-2\"></div><div class=\"grid-elem\" id=\"graph-3\"></div><div class=\"grid-elem\" id=\"graph-4\"></div>'
 
-const gridElements6 = '<div class=\"grid-elem\" id=\"graph-5\"></div></div><div class=\"grid-elem\" id=\"graph-6\"></div>'
 //-----------------------------------------------//
 //  Function to graph the bar chart for graph 1  //
 //-----------------------------------------------//
@@ -479,12 +480,6 @@ function grid4() {
     document.getElementById('grid-container').innerHTML = gridElements4;
 }
 
-// This function creates 4 grid elements 
-// function grid6() {
-//     document.getElementById('body').innerHTML += '<div class=\"grid-2\"><div class=\"grid-container-2\" id=\"grid-container-2\"></div></div>'
-//     document.getElementById('grid-container-1').innerHTML = gridElements4;
-//     document.getElementById('grid-container-2').innerHTML = gridElements6;
-// }
 //---------------------------------------------------------------//
 // Function to graph the visualizations when you click the panel //
 //---------------------------------------------------------------//

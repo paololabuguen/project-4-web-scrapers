@@ -14,8 +14,6 @@ body {
     /* background-color: #7c677f; */
 }
 
-
-
 /* ------------ */
 /* Header Style */
 /* ------------ */
@@ -178,7 +176,11 @@ h1 {
     background-image: url(https://st2.depositphotos.com/3205185/10331/v/450/depositphotos_103314670-stock-illustration-abstract-geometric-background-with-connecting.jpg);
     background-position: bottom;
     background-blend-mode: lighten;
-    /* overflow: auto; */
+}
+
+#graph-3,
+#graph-4 {
+    overflow: auto;
 }
 
 #graph-1:hover,
@@ -193,8 +195,10 @@ h1 {
 
 }
 
-/* Table */
+/* Tables */
+
 #model-1-table-left,
+#model-2-table-left,
 #model-3-table-left {
     text-align: left;
 }
