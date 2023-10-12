@@ -73,8 +73,8 @@ h1 {
 
 
 .grid-elem {
-    width: 80%;
-    height: 85%;
+    width: 90%;
+    height: 90%;
     min-width: 300px;
     min-height: 300px;
     /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
@@ -86,7 +86,7 @@ h1 {
     background-color: rgb(221, 221, 221);
     align-items: center;
     text-align: center;
-    padding: 30px;
+    padding: 20px;
 
     backdrop-filter: blur(10px);
 } 
@@ -117,7 +117,8 @@ h1 {
     
 }
 
-.side-panel-list-1, .side-panel-list-2 {
+.side-panel-list-1, 
+.side-panel-list-2 {
     list-style-type: none;
     padding: 0px;
 }
@@ -144,7 +145,8 @@ h1 {
     
 }
 
-#model-4-panel, #graph-4-panel {
+#model-4-panel, 
+#graph-4-panel {
     border-bottom: 1px solid rgb(109, 109, 109);
     
 }
@@ -154,7 +156,10 @@ h1 {
     margin: 5px;
 }
 
-#graph-1, #graph-2, #graph-3, #graph-4{
+#graph-1, 
+#graph-2, 
+#graph-3, 
+#graph-4{
     transition: all .5s ease-in-out;
     opacity: .6;
 
@@ -173,10 +178,13 @@ h1 {
     background-image: url(https://st2.depositphotos.com/3205185/10331/v/450/depositphotos_103314670-stock-illustration-abstract-geometric-background-with-connecting.jpg);
     background-position: bottom;
     background-blend-mode: lighten;
-
+    /* overflow: auto; */
 }
 
-#graph-1:hover ,#graph-2:hover, #graph-3:hover, #graph-4:hover {
+#graph-1:hover,
+#graph-2:hover, 
+#graph-3:hover, 
+#graph-4:hover {
     transform: scale(1.1);  
     opacity: 1.0;
     box-shadow: 0 0 1rem 0 rgb(150, 241, 255); 
@@ -186,20 +194,36 @@ h1 {
 }
 
 /* Table */
+#model-1-table-left,
+#model-3-table-left {
+    text-align: left;
+}
 
-.model-2-table {
+.model-1-table, 
+.model-2-table, 
+.model-3-table, 
+.model-4-table {
     width: 100%;
     border: 1px solid black;
+    border-collapse: collapse;
     padding: 5px;
 }
 
-.model-2-table-cr {
+.model-2-table-cr, 
+.model-4-table-cr {
     width: 100%;
     padding: 5px;
 }
 
-.model-2-table-element-cr {
-    padding: 0px;
+.model-1-table-element, 
+.model-2-table-element-cm, 
+.model-2-table-element,
+.model-2-table-head,
+.model-2-table-element-info, 
+.model-3-table-element,
+.model-4-table-element,
+.model-4-table-head,
+.model-4-table-element-cm {
     margin: 0px;
     width: 50%;
     border: 1px solid black;

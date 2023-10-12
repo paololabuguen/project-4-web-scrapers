@@ -10,19 +10,67 @@ function model1Information() {
     // This string is to be added to the inner HTML for the Model information
     // The classes added to the <p> elements are for customization on CSS
     // You can customize font, margins, alignment, etc.
-    htmlString = '<h3>Model 1 Analysis - Neural Network Model</h3><hr>';
-    htmlString += '<p class=\"model-element\">Hidden Layers: <b>2</b></p>';
-    htmlString += '<p class=\"model-element\">Hidden Layer 1 Nodes: <b>100</b></p>';
-    htmlString += '<p class=\"model-element\">Hidden Layer 2 Nodes: <b>100</b></p>';
-    htmlString += '<p class=\"model-element\">Hidden Layer 1 Activation Function: <b>ReLU</b></p>';
-    htmlString += '<p class=\"model-element\">Hidden Layer 2 Activation Function: <b>ReLU</b></p>';
-    htmlString += '<p class=\"model-element\">Output Layer Activation Function: <b>Sigmoid</b></p>';
-    htmlString += '<p class=\"model-element\">Batch Size: <b>128</b></p>';
-    htmlString += '<p class=\"model-element\">Epochs: <b>60</b></p>';
-    htmlString += '<p class=\"model-element\">Validation Split: <b>0.2</b></p>';
+    tableString = '<h3>Model 1 Analysis - Neural Network Model</h3><hr>';
+    // htmlString += '<p class=\"model-element\">Hidden Layers: <b>2</b></p>';
+    // htmlString += '<p class=\"model-element\">Hidden Layer 1 Nodes: <b>100</b></p>';
+    // htmlString += '<p class=\"model-element\">Hidden Layer 2 Nodes: <b>100</b></p>';
+    // htmlString += '<p class=\"model-element\">Hidden Layer 1 Activation Function: <b>ReLU</b></p>';
+    // htmlString += '<p class=\"model-element\">Hidden Layer 2 Activation Function: <b>ReLU</b></p>';
+    // htmlString += '<p class=\"model-element\">Output Layer Activation Function: <b>Sigmoid</b></p>';
+    // htmlString += '<p class=\"model-element\">Batch Size: <b>128</b></p>';
+    // htmlString += '<p class=\"model-element\">Epochs: <b>60</b></p>';
+    // htmlString += '<p class=\"model-element\">Validation Split: <b>0.2</b></p><hr>';
+    // Create a table for the data
+    tableString += '<table class=\"model-1-table\" id = \"model-1-table-1\">'
 
+    // Row 1
+    tableString += '<tr class=\"model-1-row\">'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Hidden Layers</td>'
+    tableString += '<td class=\"model-1-table-element\">2</td></tr>'
+
+    // Row 2
+    tableString += '<tr class=\"model-1-row\">'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Hidden Layer 1 Nodes</td>'
+    tableString += '<td class=\"model-1-table-element\">100</td></tr>'
+
+    // Row 3
+    tableString += '<tr class=\"model-1-row\">'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Hidden Layer 2 Nodes</td>'
+    tableString += '<td class=\"model-1-table-element\">100</td></tr>'
+
+    // Row 4
+    tableString += '<tr class=\"model-1-row\">'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Hidden Layer 1 Activation Function</td>'
+    tableString += '<td class=\"model-1-table-element\">ReLU</td></tr>'
+
+    // Row 5
+    tableString += '<tr class=\"model-1-row\">'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Hidden Layer 2 Activation Function</td>'
+    tableString += '<td class=\"model-1-table-element\">ReLU</td></tr>'
+
+    // Row 6
+    tableString += '<tr class=\"model-1-row\">'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Output Layer Activation Function</td>'
+    tableString += '<td class=\"model-1-table-element\">Sigmoid</td></tr>'
+
+    // Row 7
+    tableString += '<tr class=\"model-1-row\">'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Batch Size</td>'
+    tableString += '<td class=\"model-1-table-element\">128</td></tr>'
+
+    // Row 7
+    tableString += '<tr class=\"model-1-row\">'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Epochs</td>'
+    tableString += '<td class=\"model-1-table-element\">60</td></tr>'
+
+    // Row 7
+    tableString += '<tr class=\"model-1-row\">'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Validation Split</td>'
+    tableString += '<td class=\"model-1-table-element\">0.2</td></tr>'
+
+    tableString += '</table>'
     // Add to the inner HTML
-    document.getElementById("graph-1-grid-text").innerHTML = htmlString;
+    document.getElementById("graph-1-grid-text").innerHTML = tableString;
 }
 
 //-------------------------------------------------------------//
