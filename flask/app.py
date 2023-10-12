@@ -6,6 +6,9 @@ from sqlalchemy import create_engine, func, inspect
 import tensorflow
 from tensorflow.keras.models import load_model
 
+import pickle
+import joblib
+
 from pathlib import Path
 from sklearn.metrics import balanced_accuracy_score
 import random
@@ -60,6 +63,8 @@ def homepage():
            "/api/v1/open_credit_line<br/>"
            "/api/v1/raph_training_record (Raph's Training Record Dataframe)<br/>"
            "/api/v1/model_1 <br/>"
+           "/api/v1/model_2 <br/>"
+           "/api/v1/model_3 <br/>"
            )
 
 #####################################################
@@ -268,8 +273,8 @@ def model_1():
 
     prediction_id = {0: "Non-Defaulter", 1: "Defaulter"}
     # Create separate dataframes for the X_test and y_test
-    X_test = pd.read_csv(Path(X_test_link))
-    y_test = pd.read_csv(Path(y_test_link))
+    X_test = pd.read_csv(Path(X_test_link)).drop(columns=['index'])
+    y_test = pd.read_csv(Path(y_test_link)).drop(columns=['index'])
 
     # Generate a random index
     random_row = X_test.sample()
@@ -298,21 +303,33 @@ def model_1():
 @app.route("/api/v1/model_2")
 def model_2():
     # Links for the data
-    model_1_link = 'Resources/Raph_Model_Files/Saved_Models/raph-model.h5'
-    X_test_link = 'Resources/Raph_Model_Files/Splits/X_test.csv'
-    y_test_link = 'Resources/Raph_Model_Files/Splits/y_test.csv'
+    model_2_link = 'Resources/Judsica_Files/model_2.h5'
+    X_test_link = 'Resources/Judsica_Files/X_test_scaled.csv'
+    y_test_link = 'Resources/Judsica_Files/y_test.csv'
+    X_test_row_link = 'Resources/Judsica_Files/X_test.csv'
 
     prediction_id = {0: "Non-Defaulter", 1: "Defaulter"}
     # Create separate dataframes for the X_test and y_test
     X_test = pd.read_csv(Path(X_test_link))
     y_test = pd.read_csv(Path(y_test_link))
+    X_test_row = pd.read_csv(Path(X_test_row_link))
+
+    score_json = {'info': {}, 'predict':{}}
 
     # Generate a random index
     random_row = X_test.sample()
     random_index = random_row.index
 
+    col_names = list(X_test_row.iloc[random_index].keys())
+    col_values = list(X_test_row.iloc[random_index].values[0])
+
+    for i in range(len(col_names)):
+        score_json['info'][col_names[i]] = col_values[i]
+    
     # Load the model
-    model = load_model(model_1_link)
+    # model = pickle.load(open(model_2_link, 'rb'))
+    with open(model_2_link,'rb') as file:
+        model = pickle.load(file)
 
     # # Make predictions to a random rown and X_test
     prediction_row = model.predict(random_row)
@@ -323,46 +340,59 @@ def model_2():
 
     y_test.iloc[random_index, 0].values[0]
     # Dictionary to jsonify
-    score_json = {'Row Number on Test Dataframe': int(random_index[0]), 'Predicted': prediction_id[int(prediction_row[0][0])], 'Actual': prediction_id[int(y_test.iloc[random_index,0].values[0])],
+    score_json['predict'] = {'Row Number on Test Dataframe': int(random_index[0]), 'Predicted': prediction_id[int(prediction_row[0])], 'Actual': prediction_id[int(y_test.iloc[random_index,0].values[0])],
               'Balanced Accuracy Score': float(score)}
 
     return jsonify(score_json)
 
 #####################################################
-###        Route for Model 2 h5 Prediction        ###
+###        Route for Model 3 h5 Prediction        ###
 #####################################################
-# @app.route("/api/v1/model_2")
-# def model_2():
-#     # Links for the data
-#     model_2_link = 'Resources/Amjad_Files/random_forest_model.h5'
-#     X_test_link = 'Resources/Amjad_Files/X_test.csv'
-#     y_test_link = 'Resources/Amjad_Files/y_test.csv'
+@app.route("/api/v1/model_3")
+def model_3():
+    # Links for the data
+    model_3_link = 'Resources/Amjad_Files/model_3.h5'
+    X_test_link = 'Resources/Amjad_Files/X_test.csv'
+    y_test_link = 'Resources/Amjad_Files/y_test.csv'
+    X_test_row_link = 'Resources/Amjad_Files/X_test_info.csv'
 
-#     prediction_id = {0: "Non-Defaulter", 1: "Defaulter"}
-#     # Create separate dataframes for the X_test and y_test
-#     X_test = pd.read_csv(Path(X_test_link))
-#     y_test = pd.read_csv(Path(y_test_link))
+    prediction_id = {0: "Non-Defaulter", 1: "Defaulter"}
+    # Create separate dataframes for the X_test and y_test
+    X_test = pd.read_csv(Path(X_test_link))
+    y_test = pd.read_csv(Path(y_test_link))
+    X_test_row = pd.read_csv(Path(X_test_row_link))
 
-#     # Generate a random index
-#     random_row = X_test.sample()
-#     random_index = random_row.index
+    score_json = {'info': {}, 'predict':{}}
 
-#     # Load the model
-#     model = load_model(model_2_link)
+    # Generate a random index
+    random_row = X_test.sample()
+    random_index = random_row.index
 
-#     # # Make predictions to a random rown and X_test
-#     prediction_row = model.predict(random_row)
-#     prediction = model.predict(X_test)
+    # List of column names and values for the information
+    col_names = list(X_test_row.iloc[random_index].keys())
+    col_values = list(X_test_row.iloc[random_index].values[0])
+
+    for i in range(len(col_names)):
+        score_json['info'][col_names[i]] = col_values[i]
     
-#     # Balanced Accuracy score
-#     score = balanced_accuracy_score(y_test, prediction)
+    # Load the model
+    # model = pickle.load(open(model_2_link, 'rb'))
+    with open(model_3_link,'rb') as file:
+        model = joblib.load(file)
 
-#     y_test.iloc[random_index, 0].values[0]
-#     # Dictionary to jsonify
-#     score_json = {'Row Number on Test Dataframe': int(random_index[0]), 'Predicted': prediction_id[int(prediction_row[0][0])], 'Actual': prediction_id[int(y_test.iloc[random_index,0].values[0])],
-#                 'Balanced Accuracy Score': float(score)}
+    # # Make predictions to a random rown and X_test
+    prediction_row = model.predict(random_row)
+    prediction = model.predict(X_test)
 
-#     return jsonify(score_json)
+    # Balanced Accuracy score
+    score = balanced_accuracy_score(y_test, prediction)
+
+    y_test.iloc[random_index, 0].values[0]
+    # Dictionary to jsonify
+    score_json['predict'] = {'Row Number on Test Dataframe': int(random_index[0]), 'Predicted': prediction_id[int(prediction_row[0])], 'Actual': prediction_id[int(y_test.iloc[random_index,0].values[0])],
+              'Balanced Accuracy Score': float(score)}
+
+    return jsonify(score_json)
 
 #####################################################
 ###      Route for Raph's Training record csv     ###
