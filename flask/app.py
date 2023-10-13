@@ -3,8 +3,8 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func, inspect
-import tensorflow
-from tensorflow.keras.models import load_model
+# import tensorflow
+# from tensorflow.keras.models import load_model
 
 import pickle
 import joblib
@@ -61,6 +61,7 @@ def homepage():
            "/api/v1/loan_funded (Count of amounts of loans funded by category)<br/>"
            "/api/v1/employment_duration (Counts of employment duration of applicants)<br/>"
            "/api/v1/open_credit_line<br/>"
+           "/api/v1/bank_grade<br/>"
            "/api/v1/raph_training_record (Raph's Training Record Dataframe)<br/>"
            "/api/v1/model_1 <br/>"
            "/api/v1/model_2 <br/>"
@@ -237,7 +238,7 @@ def loan_status():
 
 
 #####################################################
-###             Route for Loan Status             ###
+###             Route for Credit line             ###
 #####################################################
 @app.route("/api/v1/open_credit_line")
 def open_credit_line():
@@ -260,6 +261,29 @@ def open_credit_line():
         open_credit_json[open_credit[i]] = open_credit_count[i]
     
     return jsonify(open_credit_json)
+
+#####################################################
+###             Route for Bank Rating             ###
+#####################################################
+@app.route("/api/v1/bank_grade")
+def bank_grade():
+
+    # Dictionary to jsonify
+    bank_grade_dict = {}
+
+    # Query the count of each home_ownership type
+    session = Session(engine)
+    results = session.query(func.count(Bank_Loan_Test.grade),
+                            Bank_Loan_Test.grade)\
+        .group_by(Bank_Loan_Test.grade)\
+        .all()
+    session.close()
+
+    # Add the data to the dictionary where keys are teh home ownership type and the values are the count
+    for row in results:
+        bank_grade_dict[row[1].lower().capitalize()] = row[0]
+
+    return jsonify(bank_grade_dict)
 
 #####################################################
 ###        Route for Model 1 h5 Prediction        ###
@@ -304,8 +328,8 @@ def model_1():
 
     y_test.iloc[random_index, 0].values[0]
     # Dictionary to jsonify
-    score_json['predict'] = {'Row Number on Test Dataframe': int(random_index[0]), 'Predicted': prediction_id[int(prediction_row[0][0])], 'Actual': prediction_id[int(y_test.iloc[random_index,0].values[0])],
-              'Balanced Accuracy Score': float(score)}
+    score_json['predict'] = {'Row Number on Test Dataframe': int(random_index[0]), 'Predicted': prediction_id[int(prediction_row[0][0])],
+                              'Actual': prediction_id[int(y_test.iloc[random_index,0].values[0])], 'Balanced Accuracy Score': float(score)}
 
     return jsonify(score_json)
 
@@ -326,6 +350,7 @@ def model_2():
     y_test = pd.read_csv(Path(y_test_link))
     X_test_row = pd.read_csv(Path(X_test_row_link))
 
+    # Dictionary to jsonify
     score_json = {'info': {}, 'predict':{}}
 
     # Generate a random index
@@ -352,8 +377,8 @@ def model_2():
 
     y_test.iloc[random_index, 0].values[0]
     # Dictionary to jsonify
-    score_json['predict'] = {'Row Number on Test Dataframe': int(random_index[0]), 'Predicted': prediction_id[int(prediction_row[0])], 'Actual': prediction_id[int(y_test.iloc[random_index,0].values[0])],
-              'Balanced Accuracy Score': float(score)}
+    score_json['predict'] = {'Row Number on Test Dataframe': int(random_index[0]), 'Predicted': prediction_id[int(prediction_row[0])],
+                              'Actual': prediction_id[int(y_test.iloc[random_index,0].values[0])], 'Balanced Accuracy Score': float(score)}
 
     return jsonify(score_json)
 
@@ -401,8 +426,8 @@ def model_3():
 
     y_test.iloc[random_index, 0].values[0]
     # Dictionary to jsonify
-    score_json['predict'] = {'Row Number on Test Dataframe': int(random_index[0]), 'Predicted': prediction_id[int(prediction_row[0])], 'Actual': prediction_id[int(y_test.iloc[random_index,0].values[0])],
-              'Balanced Accuracy Score': float(score)}
+    score_json['predict'] = {'Row Number on Test Dataframe': int(random_index[0]), 'Predicted': prediction_id[int(prediction_row[0])],
+                              'Actual': prediction_id[int(y_test.iloc[random_index,0].values[0])], 'Balanced Accuracy Score': float(score)}
 
     return jsonify(score_json)
 

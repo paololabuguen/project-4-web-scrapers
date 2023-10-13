@@ -355,6 +355,7 @@ function model1Prediction() {
         grid3String += '</table>';
 
         grid3String +='<h3>Random Row Information</h3><hr>'
+        
         // Grid 3 elements
         grid3String += '<table class=\"model-1-table\" id = \"model-1-table-1\">';
 

@@ -467,6 +467,7 @@ function homeOwnerTypeGraph() {
 
 }
 
+
 //-----------------------------------------------//
 //  Functions to change number of grid elements  //
 //-----------------------------------------------//
