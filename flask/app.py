@@ -3,14 +3,14 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func, inspect
-# import tensorflow
-# from tensorflow.keras.models import load_model
+import tensorflow
+from tensorflow.keras.models import load_model
 
 import pickle
 import joblib
 
 from pathlib import Path
-from sklearn.metrics import balanced_accuracy_score
+from sklearn.metrics import balanced_accuracy_score,accuracy_score
 import random
 
 import pandas as pd
@@ -316,8 +316,7 @@ def model_1():
     
     # Load the model
     with open(model_1_link,'rb') as file:
-        model = joblib.load(file)
-    # model = load_model(model_1_link)
+        model = load_model(model_1_link)
 
     # Make predictions to a random rown and X_test
     prediction_row = model.predict(random_row)
@@ -325,11 +324,13 @@ def model_1():
 
     # Balanced Accuracy score
     score = balanced_accuracy_score(y_test, prediction)
+    accu_score = accuracy_score(y_test, prediction)
 
     y_test.iloc[random_index, 0].values[0]
     # Dictionary to jsonify
     score_json['predict'] = {'Row Number on Test Dataframe': int(random_index[0]), 'Predicted': prediction_id[int(prediction_row[0][0])],
-                              'Actual': prediction_id[int(y_test.iloc[random_index,0].values[0])], 'Balanced Accuracy Score': float(score)}
+                              'Actual': prediction_id[int(y_test.iloc[random_index,0].values[0])], 'Balanced Accuracy Score': float(score),
+                              'Accuracy Score': float(accu_score)}
 
     return jsonify(score_json)
 
@@ -501,4 +502,3 @@ def raph_training_record():
     
 if __name__ == "__main__":
     app.run(debug=True)
-    
