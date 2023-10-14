@@ -48,7 +48,7 @@ function model1Information() {
     // Row 7
     tableString += '<tr class=\"model-1-row\">'
     tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Batch Size</td>'
-    tableString += '<td class=\"model-1-table-element\">128</td></tr>'
+    tableString += '<td class=\"model-1-table-element\">32</td></tr>'
 
     // Row 7
     tableString += '<tr class=\"model-1-row\">'

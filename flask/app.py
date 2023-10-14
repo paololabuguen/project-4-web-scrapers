@@ -326,7 +326,7 @@ def model_1():
     score = balanced_accuracy_score(y_test, prediction)
     accu_score = accuracy_score(y_test, prediction)
 
-    y_test.iloc[random_index, 0].values[0]
+    print(random_index)
     # Dictionary to jsonify
     score_json['predict'] = {'Row Number on Test Dataframe': int(random_index[0]), 'Predicted': prediction_id[int(prediction_row[0][0])],
                               'Actual': prediction_id[int(y_test.iloc[random_index,0].values[0])], 'Balanced Accuracy Score': float(score),
