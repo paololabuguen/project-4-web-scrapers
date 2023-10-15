@@ -223,8 +223,10 @@ h1 {
 .model-2-table-element-cm, 
 .model-2-table-element,
 .model-2-table-head,
-.model-2-table-element-info, 
+.model-2-table-element-info,
+.model-3-table-element-cm,  
 .model-3-table-element,
+.model-3-table-head,
 .model-4-table-element,
 .model-4-table-head,
 .model-4-table-element-cm {
@@ -235,4 +237,19 @@ h1 {
 
 #model-2-dropped {
     border: 1px solid black;
+}
+
+#defaulter {
+    color: red;
+}
+
+#non-defaulter {
+    color: green;
+}
+
+.prediction-image {
+    margin-top: 20px;
+    align-items: center;
+    height: 20%;
+    width: 20%;
 }

@@ -125,6 +125,13 @@ function model2Prediction() {
         columnsGrid4 = Object.keys(rowPrediction);
         valuesGrid4 = Object.values(rowPrediction);
         
+        if (rowPrediction['Predicted'] === rowPrediction['Actual']) {
+            match = true;
+        } 
+        else {
+            match = false;
+        }
+
         grid3String +='<h3>Random Row Information</h3><hr>'
         // Grid 3 elements
         grid3String += '<table class=\"model-2-table\" id = \"model-2-table-2\">';
@@ -143,10 +150,25 @@ function model2Prediction() {
         for(i=0; i < columnsGrid4.length; i++) {
             grid4String += '<tr class=\"model-2-row\">';
             grid4String += `<td class=\"model-2-table-element\" id=\"model-2-table-left\">${columnsGrid4[i]}</td>`;
-            grid4String += `<td class=\"model-2-table-element\">${valuesGrid4[i]}</td></tr>`;
+            if (valuesGrid4[i] === 'Non-Defaulter') {
+                grid4String += `<td class=\"model-2-table-element\" id=\"non-defaulter\"><b>${valuesGrid4[i]}</b></td></tr>`;
+            } 
+            else if (valuesGrid4[i] === 'Defaulter'){
+                grid4String += `<td class=\"model-2-table-element\" id=\"defaulter\"><b>${valuesGrid4[i]}</b></td></tr>`;
+            }
+            else {
+                grid4String += `<td class=\"model-2-table-element\"><b>${valuesGrid4[i]}</b></td></tr>`;
+            }
         }
         grid4String += '</table>';
 
+        if (match) {
+            grid4String += '<div><img src=\"../Resources/Images/check.png\" alt="Check Mark" class=\"prediction-image\"></div>';
+        }
+        else {
+            grid4String += '<div><img src=\"../Resources/Images/cross.png\" alt="X mark" class=\"prediction-image\"></div>';
+        }
+        
     document.getElementById("graph-3-grid-text").innerHTML = grid3String;
     document.getElementById("graph-4-grid-text").innerHTML = grid4String;
     })

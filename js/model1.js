@@ -345,12 +345,20 @@ function model1Prediction() {
 
         // Grid 4 elements
         grid3String += '<h3>Predictions on Random Row</h3><hr>';
-        grid3String += '<table class=\"model-2-table\" id = \"model-2-table-2\">';
+        grid3String += '<table class=\"model-1-table\" id = \"model-1-table-2\">';
 
-        for (i = 0; i < columnsGrid4.length; i++) {
-            grid3String += '<tr class=\"model-2-row\">';
-            grid3String += `<td class=\"model-2-table-element\" id=\"model-2-table-left\">${columnsGrid4[i]}</td>`;
-            grid3String += `<td class=\"model-2-table-element\">${valuesGrid4[i]}</td></tr>`;
+        for(i=0; i < columnsGrid4.length; i++) {
+            grid3String += '<tr class=\"model-1-row\">';
+            grid3String += `<td class=\"model-1-table-element\" id=\"model-1-table-left\">${columnsGrid4[i]}</td>`;
+            if (valuesGrid4[i] === 'Non-Defaulter') {
+                grid3String += `<td class=\"model-1-table-element\" id=\"non-defaulter\"><b>${valuesGrid4[i]}</b></td></tr>`;
+            } 
+            else if (valuesGrid4[i] === 'Defaulter'){
+                grid3String += `<td class=\"model-1-table-element\" id=\"defaulter\"><b>${valuesGrid4[i]}</b></td></tr>`;
+            }
+            else {
+                grid3String += `<td class=\"model-1-table-element\"><b>${valuesGrid4[i]}</b></td></tr>`;
+            }
         }
         grid3String += '</table>';
 
@@ -360,9 +368,9 @@ function model1Prediction() {
         grid3String += '<table class=\"model-1-table\" id = \"model-1-table-1\">';
 
         for (i = 0; i < columnsGrid3.length; i++) {
-            grid3String += '<tr class=\"model-2-row\">';
-            grid3String += `<td class=\"model-2-table-element\" id=\"model-2-table-left\">${columnsGrid3[i]}</td>`;
-            grid3String += `<td class=\"model-2-table-element\">${valuesGrid3[i]}</td></tr>`;
+            grid3String += '<tr class=\"model-1-row\">';
+            grid3String += `<td class=\"model-1-table-element\" id=\"model-1-table-left\">${columnsGrid3[i]}</td>`;
+            grid3String += `<td class=\"model-1-table-element\">${valuesGrid3[i]}</td></tr>`;
         }
         grid3String += '</table>';
 

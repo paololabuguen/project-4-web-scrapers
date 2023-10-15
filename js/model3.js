@@ -7,7 +7,7 @@
 function model3Information() {
     /** Shows info about the Machine Learning Model on the left grid */
     htmlString = '<h3>Model 3 Analysis - Random Forest</h3><hr>';
-    htmlString += '<p class=\"model-element\">First, we did a RandomizedSearchCV for the RandomForestClassifier and found best parameters</p><hr>';
+    htmlString += '<p class=\"model-element\">For this model, we first did a RandomizedSearchCV for the Random Forest Classifier and found best parameters</p><hr>';
     htmlString += '<p class=\"model-element\"><b>Best Params</b></p>';
 
     // Table
@@ -40,6 +40,84 @@ function model3Information() {
     document.getElementById("graph-1-grid-text").innerHTML = htmlString;
 }
 
+function model3ClassificationReport() {
+
+    // Create a string to replace inner html
+    tableString = '<h3 class=\"model-3-table-header\">Classification Report</h3><hr>'
+
+    // Create a table for the data
+    tableString += '<table class=\"model-3-table\" id = \"model-3-table-2\">'
+
+    // Row 1
+    tableString += '<tr class=\"model-3-row\">'
+    tableString += '<th class=\"model-3-table-head\"></th>'
+    tableString += '<th class=\"model-3-table-head\">Precision</th>'
+    tableString += '<th class=\"model-3-table-head\">Recall</th>'
+    tableString += '<th class=\"model-3-table-head\">F1-Score</th>'
+    tableString += '<th class=\"model-3-table-head\">Support</th></tr>'
+
+    // Row 2
+    tableString += '<tr class=\"model-3-row\">'
+    tableString += '<td class=\"model-3-table-element\">0</td>'
+    tableString += '<td class=\"model-3-table-element\">0.91</td>'
+    tableString += '<td class=\"model-3-table-element\">1.00</td>'
+    tableString += '<td class=\"model-3-table-element\">0.95</td>'
+    tableString += '<td class=\"model-3-table-element\">12857</td></tr>'
+
+    // Row 3
+    tableString += '<tr class=\"model-3-row\">'
+    tableString += '<td class=\"model-3-table-element\">1</td>'
+    tableString += '<td class=\"model-3-table-element\">0.00</td>'
+    tableString += '<td class=\"model-3-table-element\">0.01</td>'
+    tableString += '<td class=\"model-3-table-element\">0.00</td>'
+    tableString += '<td class=\"model-3-table-element\">1217</td></tr>'
+
+    // Row 4
+    tableString += '<tr class=\"model-3-row\">'
+    tableString += '<td class=\"model-3-table-element\">Accuracy</td>'
+    tableString += '<td class=\"model-3-table-element\"></td>'
+    tableString += '<td class=\"model-3-table-element\"></td>'
+    tableString += '<td class=\"model-3-table-element\">0.91</td>'
+    tableString += '<td class=\"model-3-table-element\">14074</td></tr>'
+
+    // Row 5
+    tableString += '<tr class=\"model-3-row\">'
+    tableString += '<td class=\"model-3-table-element\">Macro Average</td>'
+    tableString += '<td class=\"model-3-table-element\">0.96</td>'
+    tableString += '<td class=\"model-3-table-element\">0.50</td>'
+    tableString += '<td class=\"model-3-table-element\">0.48</td>'
+    tableString += '<td class=\"model-3-table-element\">14074</td></tr>'
+
+    // Row 6
+    tableString += '<tr class=\"model-3-row\">'
+    tableString += '<td class=\"model-3-table-element\">Weighted Average</td>'
+    tableString += '<td class=\"model-3-table-element\">0.92</td>'
+    tableString += '<td class=\"model-3-table-element\">0.91</td>'
+    tableString += '<td class=\"model-3-table-element\">0.87</td>'
+    tableString += '<td class=\"model-3-table-element\">14074</td></tr>'
+
+    tableString += '</table>'
+
+    tableString += '<h3>Confusion Matrix</h3><hr>';
+
+    // Create a table for the data
+    tableString += '<table class=\"model-3-table\" id = \"model-3-table-1\">'
+
+    // Row 1
+    tableString += '<tr class=\"model-3-row\">'
+    tableString += '<td class=\"model-3-table-element-cm\">12857</td>'
+    tableString += '<td class=\"model-3-table-element-cm">0</td></tr>'
+
+    // Row 2
+    tableString += '<tr class=\"model-3-row\">'
+    tableString += '<td class=\"model-3-table-element-cm\">1217</td>'
+    tableString += '<td class=\"model-3-table-element-cm\">4</td></tr>'
+
+    tableString += '</table>'
+
+    document.getElementById("graph-2-grid-text").innerHTML = tableString;
+}
+
 function model3Prediction() {
     // Create a button
     predictionUrl = link + '/model_3';
@@ -53,6 +131,13 @@ function model3Prediction() {
         valuesGrid3 = Object.values(rowInfo);
         columnsGrid4 = Object.keys(rowPrediction);
         valuesGrid4 = Object.values(rowPrediction);
+
+        if (rowPrediction['Predicted'] === rowPrediction['Actual']) {
+            match = true;
+        } 
+        else {
+            match = false;
+        }
 
         grid3String +='<h3>Random Row Information</h3><hr>'
         // Grid 3 elements
@@ -72,10 +157,26 @@ function model3Prediction() {
         for(i=0; i < columnsGrid4.length; i++) {
             grid4String += '<tr class=\"model-3-row\">';
             grid4String += `<td class=\"model-3-table-element\" id=\"model-3-table-left\">${columnsGrid4[i]}</td>`;
-            grid4String += `<td class=\"model-3-table-element\">${valuesGrid4[i]}</td></tr>`;
+
+            if (valuesGrid4[i] === 'Non-Defaulter') {
+                grid4String += `<td class=\"model-3-table-element\" id=\"non-defaulter\"><b>${valuesGrid4[i]}</b></td></tr>`;
+            } 
+            else if (valuesGrid4[i] === 'Defaulter'){
+                grid4String += `<td class=\"model-3-table-element\" id=\"defaulter\"><b>${valuesGrid4[i]}</b></td></tr>`;
+            }
+            else {
+                grid4String += `<td class=\"model-3-table-element\"><b>${valuesGrid4[i]}</b></td></tr>`;
+            }
         }
         grid4String += '</table>';
 
+        if (match) {
+            grid4String += '<div><img src=\"../Resources/Images/check.png\" alt="Check Mark" class=\"prediction-image\"></div>';
+        }
+        else {
+            grid4String += '<div><img src=\"../Resources/Images/cross.png\" alt="X mark" class=\"prediction-image\"></div>';
+        }
+        
     document.getElementById("graph-3-grid-text").innerHTML = grid3String;
     document.getElementById("graph-4-grid-text").innerHTML = grid4String;
     })
@@ -95,6 +196,7 @@ function model3() {
     document.getElementById("graph-4").innerHTML = graphGrid4TextString;
 
     // Call the functions to fill the grid elements
+    model3ClassificationReport();
     model3Information();
     model3Prediction();
 }
