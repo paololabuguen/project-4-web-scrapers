@@ -199,7 +199,8 @@ h1 {
 
 #model-1-table-left,
 #model-2-table-left,
-#model-3-table-left {
+#model-3-table-left,
+#model-4-table-left {
     text-align: left;
 }
 
@@ -229,7 +230,8 @@ h1 {
 .model-3-table-head,
 .model-4-table-element,
 .model-4-table-head,
-.model-4-table-element-cm {
+.model-4-table-element-cm,
+.model-4-table-element-info {
     margin: 0px;
     width: 50%;
     border: 1px solid black;
