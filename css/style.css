@@ -170,17 +170,12 @@ h1 {
     /*Use inherit if you want glass-like style
     background: relative; */
     background-color: #cfdfea;
-    overflow: hidden;
+    overflow:scroll;
 
     /* Background for Containers*/
     background-image: url(https://st2.depositphotos.com/3205185/10331/v/450/depositphotos_103314670-stock-illustration-abstract-geometric-background-with-connecting.jpg);
     background-position: bottom;
     background-blend-mode: lighten;
-}
-
-#graph-3,
-#graph-4 {
-    overflow: auto;
 }
 
 #graph-1:hover,
