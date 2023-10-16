@@ -10,19 +10,59 @@ function model1Information() {
     // This string is to be added to the inner HTML for the Model information
     // The classes added to the <p> elements are for customization on CSS
     // You can customize font, margins, alignment, etc.
-    htmlString = '<h3>Model 1 Analysis - Neural Network Model</h3><hr>';
-    htmlString += '<p class=\"model-element\">Hidden Layers: <b>2</b></p>';
-    htmlString += '<p class=\"model-element\">Hidden Layer 1 Nodes: <b>100</b></p>';
-    htmlString += '<p class=\"model-element\">Hidden Layer 1 Nodes: <b>100</b></p>';
-    htmlString += '<p class=\"model-element\">Hidden Layer 1 Activation Function: <b>ReLU</b></p>';
-    htmlString += '<p class=\"model-element\">Hidden Layer 2 Activation Function: <b>ReLU</b></p>';
-    htmlString += '<p class=\"model-element\">Output Layer Activation Function: <b>Sigmoid</b></p>';
-    htmlString += '<p class=\"model-element\">Batch Size: <b>128</b></p>';
-    htmlString += '<p class=\"model-element\">Epochs: <b>60</b></p>';
-    htmlString += '<p class=\"model-element\">Validation Split: <b>0.2</b></p>';
+    tableString = '<h3>Model 1 Analysis - Neural Network Model</h3><hr>';
 
+    // Create a table for the data
+    tableString += '<table class=\"model-1-table\" id = \"model-1-table-1\">'
+
+    // Row 1
+    tableString += '<tr class=\"model-1-row\">'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Hidden Layers</td>'
+    tableString += '<td class=\"model-1-table-element\">2</td></tr>'
+
+    // Row 2
+    tableString += '<tr class=\"model-1-row\">'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Hidden Layer 1 Nodes</td>'
+    tableString += '<td class=\"model-1-table-element\">100</td></tr>'
+
+    // Row 3
+    tableString += '<tr class=\"model-1-row\">'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Hidden Layer 2 Nodes</td>'
+    tableString += '<td class=\"model-1-table-element\">100</td></tr>'
+
+    // Row 4
+    tableString += '<tr class=\"model-1-row\">'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Hidden Layer 1 Activation Function</td>'
+    tableString += '<td class=\"model-1-table-element\">ReLU</td></tr>'
+
+    // Row 5
+    tableString += '<tr class=\"model-1-row\">'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Drop out (Regularization)</td>'
+    tableString += '<td class=\"model-1-table-element\">0.5</td></tr>'
+
+    // Row 6
+    tableString += '<tr class=\"model-1-row\">'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Output Layer Activation Function</td>'
+    tableString += '<td class=\"model-1-table-element\">Sigmoid</td></tr>'
+
+    // Row 7
+    tableString += '<tr class=\"model-1-row\">'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Batch Size</td>'
+    tableString += '<td class=\"model-1-table-element\">32</td></tr>'
+
+    // Row 7
+    tableString += '<tr class=\"model-1-row\">'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Epochs</td>'
+    tableString += '<td class=\"model-1-table-element\">50</td></tr>'
+
+    // Row 7
+    tableString += '<tr class=\"model-1-row\">'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Validation Split</td>'
+    tableString += '<td class=\"model-1-table-element\">0.1 or 10% of X_train</td></tr>'
+
+    tableString += '</table>'
     // Add to the inner HTML
-    document.getElementById("graph-1-grid-text").innerHTML = htmlString;
+    document.getElementById("graph-1-grid-text").innerHTML = tableString;
 }
 
 //-------------------------------------------------------------//
@@ -258,7 +298,7 @@ function model2Graph() {
             // The customization for the lines are here as well
             datasets: [
 
-                
+
                 // Third data for the line graph
                 {
                     label: 'Validation Loss',
@@ -289,22 +329,76 @@ function model2Graph() {
     })
 }
 
+function model1Prediction() {
+    // Create a button
+    predictionUrl = link + '/model_1';
+    grid3String = '<button type=\"button\" onclick=model1Prediction()>Random Row</button>';
+
+    d3.json(predictionUrl).then(data => {
+        rowInfo = data.info;
+        rowPrediction = data.predict;
+
+        columnsGrid3 = Object.keys(rowInfo);
+        valuesGrid3 = Object.values(rowInfo);
+        columnsGrid4 = Object.keys(rowPrediction);
+        valuesGrid4 = Object.values(rowPrediction);
+
+        // Grid 4 elements
+        grid3String += '<h3>Predictions on Random Row</h3><hr>';
+        grid3String += '<table class=\"model-1-table\" id = \"model-1-table-2\">';
+
+        for(i=0; i < columnsGrid4.length; i++) {
+            grid3String += '<tr class=\"model-1-row\">';
+            grid3String += `<td class=\"model-1-table-element\" id=\"model-1-table-left\">${columnsGrid4[i]}</td>`;
+            if (valuesGrid4[i] === 'Non-Defaulter') {
+                grid3String += `<td class=\"model-1-table-element\" id=\"non-defaulter\"><b>${valuesGrid4[i]}</b></td></tr>`;
+            } 
+            else if (valuesGrid4[i] === 'Defaulter'){
+                grid3String += `<td class=\"model-1-table-element\" id=\"defaulter\"><b>${valuesGrid4[i]}</b></td></tr>`;
+            }
+            else {
+                grid3String += `<td class=\"model-1-table-element\"><b>${valuesGrid4[i]}</b></td></tr>`;
+            }
+        }
+        grid3String += '</table>';
+
+        grid3String +='<h3>Random Row Information</h3><hr>'
+        
+        // Grid 3 elements
+        grid3String += '<table class=\"model-1-table\" id = \"model-1-table-1\">';
+
+        for (i = 0; i < columnsGrid3.length; i++) {
+            grid3String += '<tr class=\"model-1-row\">';
+            grid3String += `<td class=\"model-1-table-element\" id=\"model-1-table-left\">${columnsGrid3[i]}</td>`;
+            grid3String += `<td class=\"model-1-table-element\">${valuesGrid3[i]}</td></tr>`;
+        }
+        grid3String += '</table>';
+
+
+        document.getElementById("graph-3-grid-text").innerHTML = grid3String;
+        // document.getElementById("graph-4-grid-text").innerHTML = grid4String;
+    })
+}
 
 // This is the function called when you click Model 1 on the side panel
 function model1() {
     // Want 4 grid elements
     grid4();
+    htmlString = '<button type=\"button\" onclick=model1Prediction()>Random Row</button>';
     // Refresh the grid elements
     // Replacing the inner HTML makes it possible to change the items contained in the
     // grid to the new items from this model
     document.getElementById("graph-1").innerHTML = graphGrid1TextString;
     document.getElementById("graph-2").innerHTML = graphGrid2CanvasString;
+    document.getElementById("graph-3").innerHTML = graphGrid3TextString;
     document.getElementById("graph-4").innerHTML = graphGrid4CanvasString;
-    
+
+    document.getElementById("graph-3-grid-text").innerHTML = htmlString;
     // Call the functions to fill the grid elements
     model1Information();
     model1Graph();
-    model2Graph(); 
+    model2Graph();
+    model1Prediction();
 }
 
 // Click event when the side panel options are clicked
