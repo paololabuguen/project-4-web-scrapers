@@ -37,8 +37,8 @@ function model1Information() {
 
     // Row 5
     tableString += '<tr class=\"model-1-row\">'
-    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Hidden Layer 2 Activation Function</td>'
-    tableString += '<td class=\"model-1-table-element\">ReLU</td></tr>'
+    tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Drop out (Regularization)</td>'
+    tableString += '<td class=\"model-1-table-element\">0.5</td></tr>'
 
     // Row 6
     tableString += '<tr class=\"model-1-row\">'
@@ -53,12 +53,12 @@ function model1Information() {
     // Row 7
     tableString += '<tr class=\"model-1-row\">'
     tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Epochs</td>'
-    tableString += '<td class=\"model-1-table-element\">60</td></tr>'
+    tableString += '<td class=\"model-1-table-element\">50</td></tr>'
 
     // Row 7
     tableString += '<tr class=\"model-1-row\">'
     tableString += '<td class=\"model-1-table-element\" id=\"model-1-table-left\">Validation Split</td>'
-    tableString += '<td class=\"model-1-table-element\">0.2</td></tr>'
+    tableString += '<td class=\"model-1-table-element\">0.1 or 10% of X_train</td></tr>'
 
     tableString += '</table>'
     // Add to the inner HTML
