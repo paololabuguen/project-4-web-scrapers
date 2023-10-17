@@ -48,6 +48,3 @@ Execution Instructions
 * After that, Perform the random oversampler on training data to alleviate the class imbalance.
 * Again, implement the logistic regression and evaluate the model.
 
-## Results or Conclusion
-
-The model s balance accuracy scores 0.515. For the confusion matrix we correctly predicted 10,331 instance of class 0 and 276 instance of class 1. However, the model struggled with 941 false positives and 2,526 false negatives. The classification report provides additional details, demonstrating the precision for the class 0 is high (0.92), indicating low false positive rate, but the recall for the class1 is only (0.23), implying a challenge is correctly identifying the class 1. Model 4 shows promises but may require further optimization to improve overall performance, particularly in terms of recall for the class 1.
