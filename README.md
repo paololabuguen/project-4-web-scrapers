@@ -5,8 +5,7 @@ For this project, we wanted to use machine learning models to predict based off 
 We have taken a dataset on Kaggle (https://www.kaggle.com/datasets/ankitkalauni/bank-loan-defaulter-prediction-hackathon/data?select=submission.csv) to train and test our machine learning models on.
 We decided that we would create 4 different models and present them on an HTML dashboard and kept a few questions in mind:
 1) What variables are considered on getting your credit card approved?
-2) Which factor is the most important and has the biggest impact looking at all the demographics?
-3) What ML algorithms are suitable for this problem?
+2) What ML algorithms are suitable for this problem?
 
 ### Table of Contents
 
@@ -48,6 +47,8 @@ Details of each machine learning model are shown in our dashboard.
 ### Dashboard
 We decided to create a dashboard in HTML to show the results of our machine learning models. Details about each model are shown as well as some graphs about some columns in the dataset, to show how the distributions of some columns are. We are also able to test each 
 model by selecting a random row from the test data, running the model with this row and making a prediction. We then compare the prediction with the actual result.
+
+In order to use the dashboard, run the app.py file under the flask folder. Then, run dashboard.html under the html file.
 
 ### Conclusion
 In conclusion, we were mostly able to predict non-defaulters than defaulters. Accuracy was around 90% for the neural network model, random forest model and one logistic regression model and 75% for the other logistic regression model. We could improve these models in 
