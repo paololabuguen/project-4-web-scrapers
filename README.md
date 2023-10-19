@@ -41,7 +41,7 @@ were used to access the API and create the dashboard showing our results.
 
 ### Model Implementation
 With the model implementation, we had 4 of our group members choose their own machine learning model and used mainDS.csv to train and test their models. We decided to create a neural network model, a random forest model and 2 logistic regression models.
-Each member did further preprocessing such as removing columns, binning some columns, creating dummy variables for categorical variables, etc. After the training is done, we exported our models into pickle, joblib and H5 files to be able to be accessed by Flask. 
+Each member did further preprocessing such as removing columns, binning some columns, creating dummy variables for categorical variables,scaling etc. After the training is done, we exported our models into pickle, joblib and H5 files to be able to be accessed by Flask. 
 Details of each machine learning model are shown in our dashboard.
 
 ### Dashboard
