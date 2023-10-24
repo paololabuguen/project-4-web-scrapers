@@ -308,9 +308,11 @@ def model_1():
     random_row = X_test.sample()
     random_index = random_row.index
 
+    # Store the column names and values to lists
     col_names = list(X_test_row.iloc[random_index].keys())
     col_values = list(X_test_row.iloc[random_index].values[0])
 
+    # Store the random row's values into the info dictionary
     for i in range(len(col_names)):
         score_json['info'][col_names[i]] = col_values[i]
     
@@ -318,7 +320,7 @@ def model_1():
     with open(model_1_link,'rb') as file:
         model = load_model(model_1_link)
 
-    # Make predictions to a random rown and X_test
+    # Make predictions to a random row and X_test
     prediction_row = model.predict(random_row)
     prediction = model.predict(X_test)
 
@@ -326,7 +328,6 @@ def model_1():
     score = balanced_accuracy_score(y_test, prediction)
     accu_score = accuracy_score(y_test, prediction)
 
-    print(random_index)
     # Dictionary to jsonify
     score_json['predict'] = {'Row Number on Test Dataframe': int(random_index[0]), 'Predicted': prediction_id[int(prediction_row[0][0])],
                               'Actual': prediction_id[int(y_test.iloc[random_index,0].values[0])], 'Balanced Accuracy Score': float(score),
@@ -358,18 +359,19 @@ def model_2():
     random_row = X_test.sample()
     random_index = random_row.index
 
+    # Store the column names and values to lists
     col_names = list(X_test_row.iloc[random_index].keys())
     col_values = list(X_test_row.iloc[random_index].values[0])
 
+    # Store the random row's values into the info dictionary
     for i in range(len(col_names)):
         score_json['info'][col_names[i]] = col_values[i]
     
     # Load the model
-    # model = pickle.load(open(model_2_link, 'rb'))
     with open(model_2_link,'rb') as file:
         model = pickle.load(file)
 
-    # # Make predictions to a random rown and X_test
+    # # Make predictions to a random row and X_test
     prediction_row = model.predict(random_row)
     prediction = model.predict(X_test)
 
@@ -410,15 +412,15 @@ def model_3():
     col_names = list(X_test_row.iloc[random_index].keys())
     col_values = list(X_test_row.iloc[random_index].values[0])
 
+    # Store the random row's values into the info dictionary
     for i in range(len(col_names)):
         score_json['info'][col_names[i]] = col_values[i]
     
     # Load the model
-    # model = pickle.load(open(model_2_link, 'rb'))
     with open(model_3_link,'rb') as file:
         model = joblib.load(file)
 
-    # # Make predictions to a random rown and X_test
+    # # Make predictions to a random row and X_test
     prediction_row = model.predict(random_row)
     prediction = model.predict(X_test)
 
@@ -458,6 +460,7 @@ def model_4():
     col_names = list(X_test_row.iloc[random_index].keys())
     col_values = list(X_test_row.iloc[random_index].values[0])
 
+    # Store the random row's values into the info dictionary 
     for i in range(len(col_names)):
         score_json['info'][col_names[i]] = col_values[i]
     
@@ -465,7 +468,7 @@ def model_4():
     with open(model_4_link,'rb') as file:
         model = joblib.load(file)
 
-    # # Make predictions to a random rown and X_test
+    # # Make predictions to a random row and X_test
     prediction_row = model.predict(random_row)
     prediction = model.predict(X_test)
 

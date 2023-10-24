@@ -8,6 +8,7 @@ function model2Information() {
     /** Shows info about the Machine Learning Model on the left grid */
     htmlString = '<h3>Model 2 Analysis - Logistic Regression</h3><hr>';
 
+    // Create a table for the information on model 2
     htmlString += '<table class=\"model-2-table\" id = \"model-2-table-1\">'
 
     // Row 1
@@ -20,16 +21,20 @@ function model2Information() {
     htmlString += '<td class=\"model-2-table-element-info\">Columns Dropped</td>'
     htmlString += '<td class=\"model-2-table-element-info\">Grade, Batch Enrolled, Sub Grade, Employment Duration, Application Type, Verification Status, Payment Plan, Loan Title, ID, Initial List Status</td></tr>'
 
+    // Row 3
     htmlString += '<tr class=\"model-2-row\">'
     htmlString += '<td class=\"model-2-table-element-info\">Random State</td>'
     htmlString += '<td class=\"model-2-table-element-info\">11</td></tr>'
 
+    // Row 4
     htmlString += '<tr class=\"model-2-row\">'
     htmlString += '<td class=\"model-2-table-element-info\">Balanced Acuracy Score</td>'
     htmlString += '<td class=\"model-2-table-element-info\">0.5</td></tr>'
 
     htmlString += '</table>'
 
+
+    // Append to the HTML string the confusion matrix
     htmlString += '<h3>Confusion Matrix</h3><hr>';
 
     // Create a table for the data
@@ -47,12 +52,14 @@ function model2Information() {
 
     htmlString += '</table>'
 
+    // Insert the string as HTML code into the graph-1-grid-text div
     document.getElementById("graph-1-grid-text").innerHTML = htmlString;
 }
 
 function model2ClassificationReport() {
 
     // Create a string to replace inner html
+    // This is the HTML string for the classification report for model 2
     tableString = '<h3 class=\"model-2-table-header\">Classification Report</h3><hr>'
 
     // Create a table for the data
@@ -108,23 +115,33 @@ function model2ClassificationReport() {
 
     tableString += '</table>'
 
+    // Insert the string as HTML code into the graph-2-grid-text div
     document.getElementById("graph-2-grid-text").innerHTML = tableString;
 }
 
 function model2Prediction() {
     // Create a button
     predictionUrl = link + '/model_2';
+
+    // String to be added into the graph-3-grid-text div in order for the prediction info to appear
     grid3String = '<button type=\"button\" onclick=model2Prediction()>Random Row</button>';
 
     d3.json(predictionUrl).then(data => {
+
+        // Store the json information collected for model 2 into variables
         rowInfo = data.info;
         rowPrediction = data.predict;
 
+        // Store the keys and values into variables for the random row info
         columnsGrid3 = Object.keys(rowInfo);
         valuesGrid3 = Object.values(rowInfo);
+
+        // Store the keys and values into variables for the prediction info
         columnsGrid4 = Object.keys(rowPrediction);
         valuesGrid4 = Object.values(rowPrediction);
         
+        // This is to check if the predicted value is the same as actual value
+        // Depending if match is true or false, we show a check or x mark respectively
         if (rowPrediction['Predicted'] === rowPrediction['Actual']) {
             match = true;
         } 
@@ -132,8 +149,10 @@ function model2Prediction() {
             match = false;
         }
 
-        grid3String +='<h3>Random Row Information</h3><hr>'
         // Grid 3 elements
+        // Creates a table with the left column being the column names for the predictions and the right column
+        // be the respective values
+        grid3String +='<h3>Random Row Information</h3><hr>'
         grid3String += '<table class=\"model-2-table\" id = \"model-2-table-2\">';
 
         for(i=0; i < columnsGrid3.length; i++) {
@@ -144,12 +163,17 @@ function model2Prediction() {
         grid3String += '</table>';
         
         // Grid 4 elements
+        // Creates a table with the left column being the column names for the random row and the right column
+        // be the respective values
         grid4String = '<h3>Predictions on Random Row</h3><hr>';
         grid4String += '<table class=\"model-2-table\" id = \"model-2-table-2\">';
 
         for(i=0; i < columnsGrid4.length; i++) {
             grid4String += '<tr class=\"model-2-row\">';
             grid4String += `<td class=\"model-2-table-element\" id=\"model-2-table-left\">${columnsGrid4[i]}</td>`;
+
+            // This is to check the values for Predicted and Actual and assigns a different ID.
+            // Non-Defaulter would appear green and Defaulter would appear red
             if (valuesGrid4[i] === 'Non-Defaulter') {
                 grid4String += `<td class=\"model-2-table-element\" id=\"non-defaulter\"><b>${valuesGrid4[i]}</b></td></tr>`;
             } 
@@ -162,13 +186,15 @@ function model2Prediction() {
         }
         grid4String += '</table>';
 
+        // Shows a check or an X depending on match being true or false
         if (match) {
             grid4String += '<div><img src=\"../Resources/Images/check.png\" alt="Check Mark" class=\"prediction-image\"></div>';
         }
         else {
             grid4String += '<div><img src=\"../Resources/Images/cross.png\" alt="X mark" class=\"prediction-image\"></div>';
         }
-        
+    
+    // Insert the string as HTML code into the graph-3-grid-text and graph-4-grid-text div
     document.getElementById("graph-3-grid-text").innerHTML = grid3String;
     document.getElementById("graph-4-grid-text").innerHTML = grid4String;
     })

@@ -8,7 +8,7 @@ function model1Information() {
     /** Shows info about the Machine Learning Model on the left grid */
 
     // This string is to be added to the inner HTML for the Model information
-    // The classes added to the <p> elements are for customization on CSS
+    // The classes added to the <table>, <tr> and <td> elements are for customization on CSS
     // You can customize font, margins, alignment, etc.
     tableString = '<h3>Model 1 Analysis - Neural Network Model</h3><hr>';
 
@@ -332,24 +332,36 @@ function model2Graph() {
 function model1Prediction() {
     // Create a button
     predictionUrl = link + '/model_1';
+
+    // String to be added into the graph-3-grid-text div in order for the prediction info to appear
     grid3String = '<button type=\"button\" onclick=model1Prediction()>Random Row</button>';
 
     d3.json(predictionUrl).then(data => {
+
+        // Store the json information collected for model 1 into variables
         rowInfo = data.info;
         rowPrediction = data.predict;
 
+        // Store the keys and values into variables for the random row info
         columnsGrid3 = Object.keys(rowInfo);
         valuesGrid3 = Object.values(rowInfo);
+
+        // Store the keys and values into variables for the prediction info
         columnsGrid4 = Object.keys(rowPrediction);
         valuesGrid4 = Object.values(rowPrediction);
 
-        // Grid 4 elements
+        // Grid 3 elements
+        // Creates a table with the left column being the column names for the predictions and the right column
+        // be the respective values
         grid3String += '<h3>Predictions on Random Row</h3><hr>';
         grid3String += '<table class=\"model-1-table\" id = \"model-1-table-2\">';
 
         for(i=0; i < columnsGrid4.length; i++) {
             grid3String += '<tr class=\"model-1-row\">';
             grid3String += `<td class=\"model-1-table-element\" id=\"model-1-table-left\">${columnsGrid4[i]}</td>`;
+
+            // This is to check the values for Predicted and Actual and assigns a different ID.
+            // Non-Defaulter would appear green and Defaulter would appear red
             if (valuesGrid4[i] === 'Non-Defaulter') {
                 grid3String += `<td class=\"model-1-table-element\" id=\"non-defaulter\"><b>${valuesGrid4[i]}</b></td></tr>`;
             } 
@@ -362,9 +374,12 @@ function model1Prediction() {
         }
         grid3String += '</table>';
 
+
         grid3String +='<h3>Random Row Information</h3><hr>'
         
         // Grid 3 elements
+        // Creates a table with the left column being the column names for the random row and the right column
+        // be the respective values
         grid3String += '<table class=\"model-1-table\" id = \"model-1-table-1\">';
 
         for (i = 0; i < columnsGrid3.length; i++) {
@@ -374,9 +389,8 @@ function model1Prediction() {
         }
         grid3String += '</table>';
 
-
+        // Insert the string as HTML code into the graph-3-grid-text div
         document.getElementById("graph-3-grid-text").innerHTML = grid3String;
-        // document.getElementById("graph-4-grid-text").innerHTML = grid4String;
     })
 }
 
